@@ -1,0 +1,131 @@
+
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25px 25px;
+    border-bottom: 1px solid #e9ecef;
+    position: relative;
+}
+/*.upper{*/
+
+/*    background-color: #E1BEE1;*/
+/*    width:100%;*/
+/*    padding: 25px 25px;*/
+/*    border-bottom: 1px solid #e9ecef;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+
+/*}*/
+/*.lower{*/
+/*    padding: 25px 25px;*/
+/*    width:100%;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    background-color: #f8f9fa;*/
+/*}*/
+
+.lower {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+
+.logo {
+    position: absolute;
+    left: 20px;
+}
+
+.logo img {
+    height: 40px;
+}
+
+
+.upnav-menu ul {
+    position: absolute;
+    left: 20px;
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.upnav-menu li {
+    margin-right: 20px;
+}
+
+.upnav-menu li:last-child {
+    margin-right: 0;
+}
+
+.upnav-menu a {
+    text-decoration: none;
+    color: #343a40;
+    font-weight:lighter;
+}
+
+.upnav-menu a:hover {
+    color: #A84B94;
+}
+
+.nav-menu ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-menu li {
+    margin-right: 20px;
+}
+
+.nav-menu li:last-child {
+    margin-right: 0;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #343a40;
+    font-weight: bold;
+}
+
+.nav-menu a:hover {
+    color: #A84B94;
+}
+
+.button a{
+    width: 135px;
+    height: 35px;
+    color: #e9ecef;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+}
+.button a:hover{
+    color: #BFDBFF;
+}
+.button{
+    background-color: #282c34;
+    width: 135px;
+    height: 35px;
+    text-decoration: none;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 20px;
+    border-radius: 10px;
+    display: flex;
+    margin: 0;
+    padding: 0;
+
+}
+
+
