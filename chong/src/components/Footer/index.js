@@ -1,12 +1,12 @@
 import React from 'react';
-import styles from './styles.css';
+import  './styles.css';
 const Footer = (props) => (
     <footer className="footer">
         <div className="main">
             <div className="mainleft">
                 <div className="column">
                     <span className="title">AJOU UNIV</span>
-                    <img src="/chong/src/pub/aurum_black.png" alt="로고"/>
+                    <img src="/aurum_black.png" alt="로고"/>
                 </div>
             </div>
             <div className="mainright">

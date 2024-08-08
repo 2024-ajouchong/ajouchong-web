@@ -3,8 +3,12 @@
     padding: 30px;
     border-top: 1px solid #e9ecef;
     bottom: 0px;
-    position: absolute;
+    /*position: absolute;*/
     width: 100%;
+    position:relative;
+    transform: translateY(0%);
+    display: flex;
+
 }
 .main {
     display: flex; /* 좌우 정렬 */
@@ -15,12 +19,14 @@
     max-width: 1200px;
     margin: 0 auto; /* 가운데 정렬을 위해 */
     flex-wrap: wrap;
+
 }
 
 .mainleft {
     display: flex;
     flex-direction: column;
     text-align: center;
+    margin-right: 100px;
 }
 
 .mainright {
@@ -32,7 +38,7 @@
 
 
 .column {
-    margin: 10px 0;
+    margin: 15px 0;
 }
 
 .title {
@@ -52,12 +58,23 @@
     justify-content: center;
     align-items: center;
     margin: 10px 0;
-
+    text-decoration: none;
+    text-decoration-line: none;
 }
 
 .infotext {
     margin: 0 10px;
     font-size: 14px;
+    text-decoration: none;
+    text-decoration-line: none;
+    cursor: pointer;
+
+}
+.infotext a{
+    color: #282c34;
+    text-decoration: none;
+    text-decoration-line: none;
+    cursor: pointer;
 
 }
 
