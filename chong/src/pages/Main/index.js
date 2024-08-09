@@ -17,9 +17,10 @@ const Main = (props, context) => {
     const images = [
         "/main/main_10.jpeg",
         "/main/main_9.jpeg",
+        "/main/main_8.JPG",
         "/main/main_7.jpg",
-        "/main/main_6.jpg",
-        "/main/main_3.jpg",
+        // "/main/main_6.jpg",
+
 
     ];
 
@@ -98,6 +99,7 @@ const Main = (props, context) => {
                     </div>
                 </div>
             </div>
+
 
             <div className="card-wrapper">
                 <div className="notices-container">
