@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Slider from 'react-slick';
 import './styles.css';
 
@@ -54,6 +54,31 @@ const Main = (props, context) => {
         },
     ];
 
+    useEffect(() => {
+        const elements = document.querySelectorAll('.notice-card, .division-line, .card-title');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible'); // 애니메이션 시작
+                    observer.unobserve(entry.target); // 애니메이션 후에는 다시 관찰하지 않도록 설정
+                }
+            });
+        }, {
+            threshold: 0.1 // 요소가 10% 보일 때 애니메이션 시작
+        });
+
+        elements.forEach(element => observer.observe(element)); // 각 요소를 관찰 시작
+
+        // Cleanup function to unobserve the elements on component unmount
+        return () => {
+            observer.disconnect();
+        };
+    }, []); // 빈 의존성 배열로 컴포넌트 마운트 시 한 번만 실행
+
+
+
+
     return (
         <div className="root">
             <div className="slider">
@@ -79,7 +104,7 @@ const Main = (props, context) => {
                     <div className="card-title">
                         <p>아우름 공지사항</p>
                         <span>다음 카드를 클릭하여 자세한 공지사항을 확인할 수 있습니다.</span>
-                        <div className="division-line"></div>
+                        <div className="division-line" id="division-line"></div>
                     </div>
                     {notices.map((notice, index) => (
                         <div className="notice-card" key={index}>
