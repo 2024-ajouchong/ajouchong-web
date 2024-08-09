@@ -22,15 +22,25 @@ const Header = () => {
     return (
         <div>
         <header className="header">
-            {/*<div className="upper">*/}
-            {/*    <nav className="upnav-menu">*/}
-            {/*        <ul>*/}
-            {/*            <li><a href="#introduction">아주대학교</a></li>*/}
-            {/*            <li><a href="#news">포탈</a></li>*/}
-            {/*            <li><a href="#communication">아주BB</a></li>*/}
-            {/*        </ul>*/}
-            {/*    </nav>*/}
-            {/*</div>*/}
+            <div className="upper">
+                <nav className="upnav-menu">
+                    <ul>
+                        <li><a href="#introduction">아주대학교</a></li>
+                        <span className="dot"> • </span>
+                        <li><a href="#news">아주대 포탈</a></li>
+                        <span className="dot"> • </span>
+                        <li><a href="#communication">아주BB</a></li>
+                    </ul>
+                </nav>
+                <nav className="upnav-menu2">
+                    <ul>
+                        <li><a href="#map">사이트맵</a></li>
+                        <span className="dot"> • </span>
+                        <li><a href="#login">로그인</a></li>
+                    </ul>
+                </nav>
+
+            </div>
 
             <div className="lower">
                 <div className="logo">

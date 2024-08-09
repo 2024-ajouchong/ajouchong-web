@@ -1,32 +1,100 @@
 .header {
     display: flex;
     flex-direction: column;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
     position: relative;
-    padding: 25px 25px;
+    /*padding: 25px 25px;*/
     position: fixed; /* 상단 고정 */
     top: 0; /* 화면 상단에 고정 */
     width: 100%; /* 화면 전체 너비를 차지하도록 설정 */
     z-index: 1000; /* 다른 요소들 위에 표시되도록 설정 */
-    background: rgba(255, 255, 255, 0.2);
+    /*background: rgba(255, 255, 255, 0.2);*/
+
+    background: linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.2), /* 상단에서 60% 불투명도 */
+            rgba(255, 255, 255, 0.1), /* 중간에서 40% 불투명도 */
+            rgba(255, 255, 255, 0)    /* 하단에서 완전 투명 */
+    );
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
+}
+.dot{
+    color: #889daa;
+    margin: 0 5px;
 }
 
 .header.scrolled {
     background: rgba(255, 255, 255, 1); /* 스크롤 시 흰색 배경 */
-    border-bottom: 1px solid rgba(255, 255, 255, 1); /* 스크롤 시 테두리 변경 */
+    border-bottom: 2px solid rgb(183, 210, 245); /* 스크롤 시 테두리 변경 */
+    .upper{
+        background-color: rgb(198, 225, 251);
+    }
+
 }
-/*.upper{*/
 
-/*    background-color: #E1BEE1;*/
-/*    width:100%;*/
-/*    padding: 25px 25px;*/
-/*    border-bottom: 1px solid #e9ecef;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
 
-/*}*/
+.upper{
+    padding: 8px 50px;
+    /*background-color: rgb(198, 225, 251);*/
+    width:100%;
+    top: 0;
+    /*padding: 10px 0;*/
+    box-sizing: border-box;
+    /*justify-content: center;*/
+    /*align-items: center;*/
+
+}
+
+
+.upper .upnav-menu  ul li {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+.upnav-menu a {
+    text-decoration: none;
+    color: #5d6b73;
+}
+.upnav-menu a:hover {
+    text-decoration: none;
+    color: #0c2643;
+}
+
+.upnav-menu ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.upper .upnav-menu2  ul li {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+.upnav-menu2 a{
+    text-decoration: none;
+    color: #5d6b73;
+}
+.upnav-menu2 ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 50px;
+    top: 8px;
+}
+.upnav-menu2 a:hover {
+    text-decoration: none;
+    color: #0c2643;
+}
+
 /*.lower{*/
 /*    padding: 25px 25px;*/
 /*    width:100%;*/
@@ -46,48 +114,23 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    padding: 30px 20px;
     position: relative;
 }
 
 
 .logo {
     position: absolute;
-    left: 20px;
+    left: 50px;
 
 }
 
 .logo img {
-    height: 40px;
+    height: 50px;
 
 }
 
 
-/*.upnav-menu ul {*/
-/*    position: absolute;*/
-/*    left: 20px;*/
-/*    list-style: none;*/
-/*    display: flex;*/
-/*    margin: 0;*/
-/*    padding: 0;*/
-/*}*/
-
-/*.upnav-menu li {*/
-/*    margin-right: 20px;*/
-/*}*/
-
-/*.upnav-menu li:last-child {*/
-/*    margin-right: 0;*/
-/*}*/
-
-/*.upnav-menu a {*/
-/*    text-decoration: none;*/
-/*    color: #343a40;*/
-/*    font-weight:lighter;*/
-/*}*/
-
-/*.upnav-menu a:hover {*/
-/*    color: #A84B94;*/
-/*}*/
 
 .nav-menu ul {
     list-style: none;
@@ -96,9 +139,11 @@
     padding: 0;
 }
 
+
 .nav-menu li {
     margin-right: 40px;
     position: relative;
+
 }
 
 .nav-menu li:last-child {
@@ -107,24 +152,50 @@
 
 .nav-menu li:hover .dropdown-container,
 .dropdown-container:hover {
-
     display: flex; /* 드롭다운 메뉴가 보이도록 설정 */
 }
-
+.nav-menu li:hover{
+    display: flex; /* 드롭다운 메뉴가 보이도록 설정 */
+}
+.dropdown-container{
+    display: flex; /* 드롭다운 메뉴가 보이도록 설정 */
+}
 .nav-menu a {
     text-decoration: none;
-    color: #343a40;
+    color: #565b61;
     font-weight: bold;
 
 }
-.navtitle{
-        color: rgb(207, 207, 207);
-        filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.7))
-        drop-shadow(0 0 2px rgba(255, 255, 255, 0.7))
-        drop-shadow(0 0 2px rgba(255, 255, 255, 0.7));
-    /*text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #fffefe, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff;*/
+
+
+
+.navtitle {
+    color: rgb(207, 207, 207);
+    /*filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.7))*/
+    /*drop-shadow(0 0 2px rgba(255, 255, 255, 0.7))*/
+    /*drop-shadow(0 0 2px rgba(255, 255, 255, 0.7));*/
+    position: relative; /* ::after 가상 요소를 사용하기 위해 position을 relative로 설정 */
 }
 
+.navtitle::after {
+    content: ''; /* 내용 없이 가상 요소 생성 */
+    position: absolute;
+    bottom: -40px; /* 아래로 20px 확장 */
+    left: 0;
+    right: 0;
+    height: 20px; /* 20px의 hover 영역 추가 */
+    /* 확장된 영역에 마우스를 올리면 드롭다운이 보이도록 설정 */
+}
+
+.navtitle:hover,
+.navtitle::after:hover {
+    color: #A84B94; /* hover 시 색상 변경 */
+}
+
+.navtitle:hover .dropdown-container,
+.navtitle::after:hover .dropdown-container {
+    display: flex; /* 드롭다운 메뉴가 보이도록 설정 */
+}
 
 .nav-menu a:hover {
     color: #A84B94;
@@ -142,7 +213,7 @@
 
 }
 .button:hover{
-    background-color: rgb(183, 210, 245);
+    background-color: #A84B94;;
 }
 .button{
     background-color: #282c34;
@@ -163,17 +234,18 @@
 }
 
 .dropdown-container {
-    background-color: #e9ecef;
-    border: 1px solid #e9ecef;
+    background-color: rgba(255, 255, 255, 0.96);
+    border-top: 2px solid #bed8f0;
     flex-direction: column;
     position: absolute;
     width: 200px;
     /*right:0;*/
     /*top: 43px; !* 네비게이션 바 바로 아래에 위치 *!*/
-    top:100%;
+    top:265%;
     display: none;
     justify-content: center;
     align-items: center;
+
     z-index: 1; /* 드롭다운 메뉴가 다른 요소들 위에 표시되도록 설정 */
     left: 50%; /* 가운데 정렬을 위한 기준 설정 */
     transform: translateX(-50%); /* 왼쪽으로 반만 이동하여 가운데 정렬 */
@@ -182,14 +254,14 @@
 .dropdown-container {
     list-style: none;
     padding: 0;
-    margin: 0;
-
+    margin: 10px 0;
 }
 
 .dropdown-container li {
     margin: 0;
-    padding: 5px 20px;
-
+    padding: 10px 50px;
+    width: 100%; /* li 요소가 드롭다운의 전체 너비를 차지하도록 설정 */
+    box-sizing: border-box;
 }
 
 
@@ -197,12 +269,23 @@
     color: #343a40;
     text-decoration: none;
     font-weight: normal;
+
+    display: block; /* a 요소가 li 전체를 차지하도록 설정 */
+    width: 100%; /* a 요소도 드롭다운의 전체 너비를 차지하도록 설정 */
+    height: 100%; /* a 요소가 li 요소의 전체 높이를 차지하도록 설정 */
+    box-sizing: border-box;
+    padding: 10px 20px; /* padding을 li와 동일하게 설정 */
 }
 
 .dropdown-container li a:hover {
-    color: #A84B94;
+    color: #ffffff;
+    background-color: #b0d8ff;
 }
+.dropdown-container li:hover {
+    background-color: #b0d8ff;
 
+
+}
 
 
 @media (max-width: 768px) {
