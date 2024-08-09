@@ -78,9 +78,14 @@
     justify-content: center;
     align-items: center;
 }
+.slick-dots li {
+    margin: 0 4px; /* dot 사이의 간격 조정 */
+
+}
+
 
 .slick-dots li button:before {
-    color: white; /* dots의 색상을 변경 */
+    color: #ffffff; /* dots의 색상을 변경 */
 }
 .overlay {
     position: absolute;
@@ -209,6 +214,7 @@
     /*border-radius: 8px;*/
     /*padding: 20px;*/
     width: 20%; /* 4개가 가로로 배치되도록 설정 */
+    height:320px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     /*transition: transform 0.3s ease;*/
     /*animation-name:fade;*/

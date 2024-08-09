@@ -25,11 +25,11 @@ const Header = () => {
             <div className="upper">
                 <nav className="upnav-menu">
                     <ul>
-                        <li><a href="#introduction">아주대학교</a></li>
+                        <li><a href="#https://www.ajou.ac.kr/">아주대학교</a></li>
                         <span className="dot"> • </span>
-                        <li><a href="#news">아주대 포탈</a></li>
+                        <li><a href="https://mportal.ajou.ac.kr/">아주대 포탈</a></li>
                         <span className="dot"> • </span>
-                        <li><a href="#communication">아주BB</a></li>
+                        <li><a href="https://eclass2.ajou.ac.kr/">아주BB</a></li>
                     </ul>
                 </nav>
                 <nav className="upnav-menu2">

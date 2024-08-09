@@ -200,7 +200,10 @@
 .nav-menu a:hover {
     color: #A84B94;
 }
-
+.nav-menu li:hover .navtitle,
+.nav-menu li:hover .dropdown-container:hover {
+    color: #A84B94; /* 드롭다운 위로 커서를 옮겼을 때에도 navtitle 색상 유지 */
+}
 .button a{
     width: 135px;
     height: 35px;
@@ -212,8 +215,13 @@
 
 
 }
-.button:hover{
-    background-color: #A84B94;;
+.button:hover {
+    background-color: #ffffff;;
+
+}
+.button:hover a {
+   color: #353535;;
+
 }
 .button{
     background-color: #282c34;
@@ -277,7 +285,7 @@
     padding: 10px 20px; /* padding을 li와 동일하게 설정 */
 }
 
-.dropdown-container li a:hover {
+.dropdown-container li:hover a{
     color: #ffffff;
     background-color: #b0d8ff;
 }

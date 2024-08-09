@@ -11,15 +11,17 @@ const Main = (props, context) => {
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 10000,
+
     };
 
     // 슬라이더에 표시할 이미지 배열
     const images = [
         "/main/main_10.jpeg",
         "/main/main_9.jpeg",
+        "/main/main_1.jpg",
         "/main/main_8.JPG",
         "/main/main_7.jpg",
-        // "/main/main_6.jpg",
+
 
 
     ];
