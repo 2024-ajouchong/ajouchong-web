@@ -141,8 +141,8 @@
 
 
 }
-.button a:hover{
-    color: #BFDBFF;
+.button:hover{
+    background-color: rgb(183, 210, 245);
 }
 .button{
     background-color: #282c34;
