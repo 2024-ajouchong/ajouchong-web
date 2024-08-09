@@ -118,7 +118,11 @@
 
 }
 .navtitle{
-    text-shadow: -1px -1px 0 #bdbdbd, 1px -1px 0 #bdbdbd, -1px 1px 0 #bdbdbd, 1px 1px 0 #bdbdbd;
+        color: rgb(207, 207, 207);
+        filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.7))
+        drop-shadow(0 0 2px rgba(255, 255, 255, 0.7))
+        drop-shadow(0 0 2px rgba(255, 255, 255, 0.7));
+    /*text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #fffefe, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff;*/
 }
 
 
@@ -152,7 +156,8 @@
     right: 20px;
     border-radius: 10px;
     display: flex;
-    margin: 0;
+    /*margin: 0;*/
+    margin-right: 30px;
     padding: 0;
 
 }
