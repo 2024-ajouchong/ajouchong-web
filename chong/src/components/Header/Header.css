@@ -249,7 +249,7 @@
     width: 200px;
     /*right:0;*/
     /*top: 43px; !* 네비게이션 바 바로 아래에 위치 *!*/
-    top:265%;
+    top:255%;
     display: none;
     justify-content: center;
     align-items: center;
