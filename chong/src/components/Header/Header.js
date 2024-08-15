@@ -54,11 +54,11 @@ const Header = () => {
                             onMouseEnter={() => handleMouseEnter('introduction')}
                             onMouseLeave={handleMouseLeave}
                         >
-                            <a className="navtitle" href="#introduction">소개</a>
+                            <div className="navtitle" href="/introduction">소개</div>
                             {dropdown === 'introduction' && (
                                 <ul className="dropdown-container">
-                                    <li><a href="#sub1">총학생회 소개</a></li>
-                                    <li><a href="#sub2">공약 소개</a></li>
+                                    <li><a href="/about">총학생회 소개</a></li>
+                                    <li><a href="/promise">공약 소개</a></li>
                                     <li><a href="#sub3">조직도</a></li>
                                     <li><a href="#sub4">인사말</a></li>
                                     <li><a href="#sub5">오시는 길</a></li>
@@ -69,7 +69,7 @@ const Header = () => {
                             onMouseEnter={() => handleMouseEnter('news')}
                             onMouseLeave={handleMouseLeave}
                         >
-                            <a className="navtitle" href="#news">소식</a>
+                            <div className="navtitle" href="#news">소식</div>
                             {dropdown === 'news' && (
                                 <ul className="dropdown-container">
                                     <li><a href="#sub1">공지사항</a></li>
@@ -81,7 +81,7 @@ const Header = () => {
                             onMouseEnter={() => handleMouseEnter('communication')}
                             onMouseLeave={handleMouseLeave}
                         >
-                            <a className="navtitle" href="#communication">소통</a>
+                            <div className="navtitle" href="#communication">소통</div>
                             {dropdown === 'communication' && (
                                 <ul className="dropdown-container">
                                     <li><a href="#sub1">Q&A</a></li>
@@ -93,7 +93,7 @@ const Header = () => {
                             onMouseEnter={() => handleMouseEnter('resources')}
                             onMouseLeave={handleMouseLeave}
                         >
-                            <a className="navtitle" href="#resources">자료실</a>
+                            <div className="navtitle" href="#resources">자료실</div>
                             {dropdown === 'resources' && (
                                 <ul className="dropdown-container">
                                     <li><a href="#sub1">세칙 및 회칙</a></li>
@@ -106,7 +106,7 @@ const Header = () => {
                             onMouseEnter={() => handleMouseEnter('student-welfare')}
                             onMouseLeave={handleMouseLeave}
                         >
-                            <a className="navtitle" href="#student-welfare">학생복지</a>
+                            <div className="navtitle" href="#student-welfare">학생복지</div>
                             {dropdown === 'student-welfare' && (
                                 <ul className="dropdown-container">
                                     <li><a href="#sub1">제휴백과</a></li>

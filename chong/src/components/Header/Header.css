@@ -170,7 +170,9 @@
 
 
 .navtitle {
-    color: rgb(207, 207, 207);
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    cursor: pointer;
     /*filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.7))*/
     /*drop-shadow(0 0 2px rgba(255, 255, 255, 0.7))*/
     /*drop-shadow(0 0 2px rgba(255, 255, 255, 0.7));*/
