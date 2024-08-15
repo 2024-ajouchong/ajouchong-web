@@ -5,26 +5,20 @@ import './App.css';
 import Header from './components/Header/Header';
 import Footer from "./components/Footer";
 import Main from "./pages/Main";
+import About from './pages/About';
 
 
 
 
 function App() {
   return (
-      // <div className="App">
-      //     <Header/>
-      //
-      //       <Main/>
-      //
-      //
-      //     <Footer/>
-      // </div>
-
       <Router>
           <div className="App">
               <Header />
               <Routes>
                   <Route path="/" element={<Main />} />
+                  <Route path="/about" element={<About />} />
+                  {/*<Route path="/promise" element={<Promise />} />*/}
               </Routes>
               <Footer />
           </div>
