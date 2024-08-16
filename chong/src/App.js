@@ -12,6 +12,14 @@ import Map from "./pages/Map";
 import Announcement from "./pages/Announcement";
 import Planning from "./pages/Planning";
 import Sitemap from "./pages/Sitemap";
+import Qna from "./pages/Qna";
+import Require from "./pages/require";
+import Bylaws from "./pages/Bylaws";
+import Proceeding from "./pages/Proceeding";
+import Audit from "./pages/Audit";
+import Promotion from "./pages/Promotion";
+import Rental from "./pages/Rental";
+
 
 
 
@@ -24,13 +32,6 @@ function App() {
           <div className="App">
               <Header />
               <Content />
-              {/*<Routes>*/}
-              {/*    <Route path="/" element={<Main />} />*/}
-              {/*    <Route path="/about" element={<About />} />*/}
-              {/*    <Route path="/introduction" element={<About />} />*/}
-              {/*<Route path="/organizatoin" element={<Organization />} />*/}
-              {/*    /!*<Route path="/promise" element={<Promise />} />*!/*/}
-              {/*</Routes>*/}
               <Footer />
           </div>
       </Router>
@@ -56,6 +57,19 @@ const Content = () => {
                 <Route path="/news" element={<Sitemap />} />
                 <Route path="/news/announcement" element={<Announcement />} />
                 <Route path="/news/planning" element={<Planning />} />
+                <Route path="/communication" element={<Sitemap />} />
+                <Route path="/communication/qna" element={<Qna />} />
+                <Route path="/communication/require" element={<Require />} />
+                <Route path="/resources" element={<Sitemap />} />
+                <Route path="/resources/bylaws" element={<Bylaws />} />
+                <Route path="/resources/proceeding" element={<Proceeding />} />
+                <Route path="/resources/audit" element={<Audit />} />
+                <Route path="/welfare" element={<Sitemap />} />
+                <Route path="/welfare/promotion" element={<Promotion />} />
+                <Route path="/welfare/rental" element={<Rental />} />
+
+
+
 
             </Routes>
         </>
