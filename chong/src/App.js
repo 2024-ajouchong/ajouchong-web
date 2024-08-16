@@ -1,4 +1,3 @@
-// import logo from './logo.svg';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route,useLocation } from 'react-router-dom';
 import './App.css';
@@ -7,6 +6,8 @@ import Breadcrumb from './components/Header/Breadcrumb';
 import Footer from "./components/Footer";
 import Main from "./pages/Main";
 import About from './pages/About';
+import Organization from "./pages/Organization";
+import PromiseComponent from "./pages/Promise";
 
 
 
@@ -21,6 +22,7 @@ function App() {
               {/*    <Route path="/" element={<Main />} />*/}
               {/*    <Route path="/about" element={<About />} />*/}
               {/*    <Route path="/introduction" element={<About />} />*/}
+              {/*<Route path="/organizatoin" element={<Organization />} />*/}
               {/*    /!*<Route path="/promise" element={<Promise />} />*!/*/}
               {/*</Routes>*/}
               <Footer />
@@ -32,7 +34,6 @@ function App() {
 const Content = () => {
     const location = useLocation();
 
-    // Breadcrumb 컴포넌트를 표시할 페이지를 설정합니다.
     const showBreadcrumb = location.pathname !== '/';
 
     return (
@@ -41,8 +42,9 @@ const Content = () => {
             <Routes>
                 <Route path="/" element={<Main />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/organization" element={<Organization />} />
+                <Route path="/promise" element={<PromiseComponent />} />
                 <Route path="/introduction" element={<Main />} />
-                {/* Define other routes as needed */}
             </Routes>
         </>
     );

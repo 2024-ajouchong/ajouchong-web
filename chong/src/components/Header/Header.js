@@ -44,7 +44,13 @@ const Header = () => {
                 return '총학생회 소개';
             case '/promise':
                 return '공약 소개';
-            // Add more cases as needed
+            case '/organization':
+                return '조직도';
+            case '/map':
+                return '오시는 길';
+            case '/greeting':
+                return '인사말';
+
             default:
                 return '';
         }
@@ -52,7 +58,7 @@ const Header = () => {
 
     const navtitle = getNavtitle();
     const isMainPage = location.pathname === '/';
-    const isIntroductionActive = ['/about', '/promise', '/sub3', '/sub4', '/sub5'].includes(location.pathname);
+    const isIntroductionActive = ['/about', '/promise', '/organization', '/map', 'greeting'].includes(location.pathname);
     // document.addEventListener('scroll', function () {
     //     const header = document.querySelector('.header');
     //     if (window.scrollY > 0) {

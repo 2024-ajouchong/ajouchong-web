@@ -3,8 +3,8 @@ import React, { useEffect } from 'react';
 
 const About = (props, context) => {
     return (
-        <div className="about">
-                <div className="aboutTitle">총학생회 소개</div>
+        <div className="context">
+                <div className="contextTitle">총학생회 소개</div>
                 <hr className="titleSeparator"/>
                 <img
                     className="aboutImg"
