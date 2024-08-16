@@ -43,8 +43,8 @@
 
 .list-container {
     margin-bottom: 20px;
-    width: 100%; /* 전체 너비를 차지하도록 설정 */
-    max-width: 300px; /* 최대 너비 설정 */
+    width: 300px; /* 전체 너비를 차지하도록 설정 */
+    /*max-width: 300px; !* 최대 너비 설정 *!*/
     padding: 20px;
     background-color: rgba(198, 225, 251, 0.16); /* 배경색 */
     justify-content: center;
@@ -67,7 +67,7 @@
 }
 
 .sitemap-list li {
-    flex: 1 1 calc(33.333% - 20px); /* 가로로 3개씩 배치, 20px는 gap을 고려 */
+    /*flex: 1 1 calc(33.333% - 20px); !* 가로로 3개씩 배치, 20px는 gap을 고려 *!*/
     box-sizing: border-box; /* 패딩과 보더를 너비에 포함 */
     margin-bottom: 10px;
 }
