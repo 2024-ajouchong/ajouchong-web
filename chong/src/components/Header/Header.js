@@ -55,32 +55,23 @@ const Header = () => {
                 return '';
         }
     };
+    const currentPath = location.pathname;
+
+    // const isMainPage = currentPath === '/';
+    // const isIntroductionActive = ['/about', '/promise', '/organization', '/map'].includes(currentPath);
+    // const isNewsActive = ['/announcement', '/planning'].includes(currentPath);
+    // const isResourcesActive = ['/bylaws', '/proceeding', '/audit'].includes(currentPath);
+    // const isCommunicationActive = ['/qna', '/require'].includes(currentPath);
+    // const isWelfareActive = ['/promotion', '/rental'].includes(currentPath);
 
     const navtitle = getNavtitle();
     const isMainPage = location.pathname === '/';
-    const isIntroductionActive = ['/about', '/promise', '/organization', '/map', 'greeting'].includes(location.pathname);
-    // document.addEventListener('scroll', function () {
-    //     const header = document.querySelector('.header');
-    //     if (window.scrollY > 0) {
-    //         header.classList.add('scrolled');
-    //     } else {
-    //         header.classList.remove('scrolled');
-    //     }
-    //
-    //     // Apply the scrolled class if not on the main page
-    //     if (location.pathname !== '/') {
-    //         header.classList.add('scrolled');
-    //     }
-    //
-    //     window.addEventListener('scroll', handleScroll);
-    //
-    //     // Cleanup event listener on unmount
-    //     return () => {
-    //         window.removeEventListener('scroll', handleScroll);
-    //     };
-    // }, [location]);
+    const isIntroductionActive = ['/introduction/about', '/introduction/promise', '/introduction/organization', '/introduction/map'].includes(location.pathname);
+    const isNewsActive = ['/news/announcement',  '/news/planning'].includes(location.pathname);
+    const isResourcesActive = ['/resources/bylaws',  '/resources/proceeding','/resources/audit'].includes(location.pathname);
+    const isCommunicationActive = ['/communication/qna', '/communication/require'].includes(location.pathname);
+    const isWelfareActive = ['/welfare/promotion', '/welfare/rental'].includes(location.pathname);
 
-// });
     return (
         <div>
         <header className="header">
@@ -119,11 +110,10 @@ const Header = () => {
                             <div  className={`navtitle ${isIntroductionActive ? 'active' : ''}`}  href="/introduction">소개</div>
                             {dropdown === 'introduction' && (
                                 <ul className="dropdown-container">
-                                    <li><a href="/about">총학생회 소개</a></li>
-                                    <li><a href="/promise">공약 소개</a></li>
-                                    <li><a href="/organization">조직도</a></li>
-                                    <li><a href="/greeting">인사말</a></li>
-                                    <li><a href="/map">오시는 길</a></li>
+                                    <li><a href="/introduction/about">총학생회 소개</a></li>
+                                    <li><a href="/introduction/promise">공약 소개</a></li>
+                                    <li><a href="/introduction/organization">조직도</a></li>
+                                    <li><a href="/introduction/map">오시는 길</a></li>
                                 </ul>
                             )}
                         </li>
@@ -131,11 +121,11 @@ const Header = () => {
                             onMouseEnter={() => handleMouseEnter('news')}
                             onMouseLeave={handleMouseLeave}
                         >
-                            <div className="navtitle" href="#news">소식</div>
+                            <div className={`navtitle ${isNewsActive ? 'active' : ''}`} href="/news">소식</div>
                             {dropdown === 'news' && (
                                 <ul className="dropdown-container">
-                                    <li><a href="#sub1">공지사항</a></li>
-                                    <li><a href="/planning">학사일정</a></li>
+                                    <li><a href="/news/announcement">공지사항</a></li>
+                                    <li><a href="/news/planning">학사일정</a></li>
                                 </ul>
                             )}
                         </li>
@@ -143,7 +133,7 @@ const Header = () => {
                             onMouseEnter={() => handleMouseEnter('communication')}
                             onMouseLeave={handleMouseLeave}
                         >
-                            <div className="navtitle" href="#communication">소통</div>
+                            <div className={`navtitle ${isCommunicationActive ? 'active' : ''}`} href="/communication">소통</div>
                             {dropdown === 'communication' && (
                                 <ul className="dropdown-container">
                                     <li><a href="/qna">Q&A</a></li>
@@ -155,12 +145,12 @@ const Header = () => {
                             onMouseEnter={() => handleMouseEnter('resources')}
                             onMouseLeave={handleMouseLeave}
                         >
-                            <div className="navtitle" href="#resources">자료실</div>
+                            <div className={`navtitle ${isResourcesActive ? 'active' : ''}`} href="/resources">자료실</div>
                             {dropdown === 'resources' && (
                                 <ul className="dropdown-container">
-                                    <li><a href="#sub1">세칙 및 회칙</a></li>
-                                    <li><a href="#sub2">회의록</a></li>
-                                    <li><a href="#sub2">감사자료</a></li>
+                                    <li><a href="/bylaws">세칙 및 회칙</a></li>
+                                    <li><a href="/proceeding">회의록</a></li>
+                                    <li><a href="/audit">감사자료</a></li>
                                 </ul>
                             )}
                         </li>
@@ -168,11 +158,11 @@ const Header = () => {
                             onMouseEnter={() => handleMouseEnter('student-welfare')}
                             onMouseLeave={handleMouseLeave}
                         >
-                            <div className="navtitle" href="#student-welfare">학생복지</div>
+                            <div className={`navtitle ${isWelfareActive ? 'active' : ''}`} href="/student-welfare">학생복지</div>
                             {dropdown === 'student-welfare' && (
                                 <ul className="dropdown-container">
-                                    <li><a href="#sub1">제휴백과</a></li>
-                                    <li><a href="#sub2">대여사업</a></li>
+                                    <li><a href="/promotion">제휴백과</a></li>
+                                    <li><a href="/rental">대여사업</a></li>
                                 </ul>
                             )}
                         </li>

@@ -8,6 +8,12 @@ import Main from "./pages/Main";
 import About from './pages/About';
 import Organization from "./pages/Organization";
 import PromiseComponent from "./pages/Promise";
+import Map from "./pages/Map";
+import Announcement from "./pages/Announcement";
+import Planning from "./pages/Planning";
+import Sitemap from "./pages/Sitemap";
+
+
 
 
 
@@ -41,10 +47,16 @@ const Content = () => {
             {showBreadcrumb && <Breadcrumb />}
             <Routes>
                 <Route path="/" element={<Main />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/organization" element={<Organization />} />
-                <Route path="/promise" element={<PromiseComponent />} />
-                <Route path="/introduction" element={<Main />} />
+                <Route path="/sitemap" element={<Sitemap />} />
+                <Route path="/introduction/about" element={<About />} />
+                <Route path="/introduction/organization" element={<Organization />} />
+                <Route path="/introduction/promise" element={<PromiseComponent />} />
+                <Route path="/introduction/map" element={<Map />} />
+                <Route path="/introduction" element={<Sitemap />} />
+                <Route path="/news" element={<Sitemap />} />
+                <Route path="/news/announcement" element={<Announcement />} />
+                <Route path="/news/planning" element={<Planning />} />
+
             </Routes>
         </>
     );
