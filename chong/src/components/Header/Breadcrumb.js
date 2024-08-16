@@ -13,10 +13,20 @@ const Breadcrumb = () => {
         promise:'공약 소개',
         organization: '조직도',
         greeting:"인사말",
-        map: "오시는 길"
-
+        map: "오시는 길",
+        announcement:"인사말",
+        planning:"학사일정",
+        news:"소식",
+        sitemap:"사이트맵",
     };
-
+    const getBreadcrumbTitle = (path) => {
+        if (path.includes('introduction')) return '소개';
+        if (path.includes('news')) return '소식';
+        if (path.includes('promise')) return '공약 소개';
+        if (path.includes('organization')) return '조직도';
+        // Add more conditions as needed
+        return '';
+    };
     return (
         <nav className="breadcrumb">
             <ul>
@@ -24,28 +34,33 @@ const Breadcrumb = () => {
                     <Link to="/">Home</Link>
                 </li>
                 {pathnames.length > 0 && (
-                    <li>
-                        <Link to="/About">소개</Link>
-                    </li>
-                )}
-                {pathnames.map((value, index) => {
-                    const to = `/${pathnames.slice(0, index + 1).join('/')}`;
-                    const isLast = index === pathnames.length - 1;
-                    const label = breadcrumbLabels[value] || value;
+                    <>
+                        <li>
+                            <Link to={`/${pathnames[0]}`}>
+                                {breadcrumbLabels[pathnames[0]]}
+                            </Link>
+                        </li>
+                        {pathnames.slice(1).map((value, index) => {
+                            const to = `/${pathnames.slice(0, index + 2).join('/')}`;
+                            const isLast = index === pathnames.length - 2;
+                            const label = breadcrumbLabels[value] || getBreadcrumbTitle(to);
 
-                    return isLast ? (
-                        <li key={to} className="breadcrumb-item">
-                            {label}
-                        </li>
-                    ) : (
-                        <li key={to} className="breadcrumb-item">
-                            <Link to={to}>{label}</Link>
-                        </li>
-                    );
-                })}
+                            return isLast ? (
+                                <li key={to} className="breadcrumb-item">
+                                    {label}
+                                </li>
+                            ) : (
+                                <li key={to} className="breadcrumb-item">
+                                    <Link to={to}>{label}</Link>
+                                </li>
+                            );
+                        })}
+                    </>
+                )}
             </ul>
         </nav>
     );
 };
+
 
 export default Breadcrumb;
