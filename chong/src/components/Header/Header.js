@@ -96,9 +96,9 @@ const Header = () => {
                 </nav>
                 <nav className="upnav-menu2">
                     <ul>
-                        <li><a href="#map">사이트맵</a></li>
+                        <li><a href="/sitemap">사이트맵</a></li>
                         <span className="dot"> • </span>
-                        <li><a href="#login">로그인</a></li>
+                        <li><a href="/login">로그인</a></li>
                     </ul>
                 </nav>
 
@@ -135,7 +135,7 @@ const Header = () => {
                             {dropdown === 'news' && (
                                 <ul className="dropdown-container">
                                     <li><a href="#sub1">공지사항</a></li>
-                                    <li><a href="#sub2">학사일정</a></li>
+                                    <li><a href="/planning">학사일정</a></li>
                                 </ul>
                             )}
                         </li>
@@ -146,8 +146,8 @@ const Header = () => {
                             <div className="navtitle" href="#communication">소통</div>
                             {dropdown === 'communication' && (
                                 <ul className="dropdown-container">
-                                    <li><a href="#sub1">Q&A</a></li>
-                                    <li><a href="#sub2">100인 안건 상정제</a></li>
+                                    <li><a href="/qna">Q&A</a></li>
+                                    <li><a href="/require">100인 안건 상정제</a></li>
                                 </ul>
                             )}
                         </li>
