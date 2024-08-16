@@ -14,10 +14,21 @@ const Breadcrumb = () => {
         organization: '조직도',
         greeting:"인사말",
         map: "오시는 길",
-        announcement:"인사말",
+        announcement:"공지사항",
         planning:"학사일정",
         news:"소식",
         sitemap:"사이트맵",
+        communication:"소통",
+        qna:"Q&A",
+        require:"100인 안건 상정제",
+        resources:"자료실",
+        bylaws:"세칙 및 회칙",
+        proceeding:"회의록",
+        audit:"감사자료",
+        welfare:"학생복지",
+        promotion:"제휴백과",
+        rental:"대여사업"
+
     };
     const getBreadcrumbTitle = (path) => {
         if (path.includes('introduction')) return '소개';

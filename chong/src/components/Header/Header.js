@@ -136,8 +136,8 @@ const Header = () => {
                             <div className={`navtitle ${isCommunicationActive ? 'active' : ''}`} href="/communication">소통</div>
                             {dropdown === 'communication' && (
                                 <ul className="dropdown-container">
-                                    <li><a href="/qna">Q&A</a></li>
-                                    <li><a href="/require">100인 안건 상정제</a></li>
+                                    <li><a href="/communication/qna">Q&A</a></li>
+                                    <li><a href="/communication/require">100인 안건 상정제</a></li>
                                 </ul>
                             )}
                         </li>
@@ -148,21 +148,21 @@ const Header = () => {
                             <div className={`navtitle ${isResourcesActive ? 'active' : ''}`} href="/resources">자료실</div>
                             {dropdown === 'resources' && (
                                 <ul className="dropdown-container">
-                                    <li><a href="/bylaws">세칙 및 회칙</a></li>
-                                    <li><a href="/proceeding">회의록</a></li>
-                                    <li><a href="/audit">감사자료</a></li>
+                                    <li><a href="/resources/bylaws">세칙 및 회칙</a></li>
+                                    <li><a href="/resources/proceeding">회의록</a></li>
+                                    <li><a href="/resources/audit">감사자료</a></li>
                                 </ul>
                             )}
                         </li>
                         <li
-                            onMouseEnter={() => handleMouseEnter('student-welfare')}
+                            onMouseEnter={() => handleMouseEnter('welfare')}
                             onMouseLeave={handleMouseLeave}
                         >
                             <div className={`navtitle ${isWelfareActive ? 'active' : ''}`} href="/student-welfare">학생복지</div>
-                            {dropdown === 'student-welfare' && (
+                            {dropdown === 'welfare' && (
                                 <ul className="dropdown-container">
-                                    <li><a href="/promotion">제휴백과</a></li>
-                                    <li><a href="/rental">대여사업</a></li>
+                                    <li><a href="/welfare/promotion">제휴백과</a></li>
+                                    <li><a href="/welfare/rental">대여사업</a></li>
                                 </ul>
                             )}
                         </li>
