@@ -1,8 +1,10 @@
-import React, { useState }  from 'react';
+import React, {  useState, useEffect }  from 'react';
 import './Header.css';
+import { useLocation } from 'react-router-dom';
 
 const Header = () => {
     const [dropdown, setDropdown] = useState(null);
+    const location = useLocation();
 
     const handleMouseEnter = (menu) => {
         setDropdown(menu);
@@ -11,14 +13,51 @@ const Header = () => {
     const handleMouseLeave = () => {
         setDropdown(null);
     };
-    document.addEventListener('scroll', function () {
+    useEffect(() => {
         const header = document.querySelector('.header');
-        if (window.scrollY > 0) {
+
+        const handleScroll = () => {
+            if (window.scrollY > 0) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        };
+
+        // Apply the scrolled class if not on the main page
+        if (location.pathname !== '/') {
             header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
         }
-    });
+
+        window.addEventListener('scroll', handleScroll);
+
+        // Cleanup event listener on unmount
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [location]);
+    // document.addEventListener('scroll', function () {
+    //     const header = document.querySelector('.header');
+    //     if (window.scrollY > 0) {
+    //         header.classList.add('scrolled');
+    //     } else {
+    //         header.classList.remove('scrolled');
+    //     }
+    //
+    //     // Apply the scrolled class if not on the main page
+    //     if (location.pathname !== '/') {
+    //         header.classList.add('scrolled');
+    //     }
+    //
+    //     window.addEventListener('scroll', handleScroll);
+    //
+    //     // Cleanup event listener on unmount
+    //     return () => {
+    //         window.removeEventListener('scroll', handleScroll);
+    //     };
+    // }, [location]);
+
+// });
     return (
         <div>
         <header className="header">
