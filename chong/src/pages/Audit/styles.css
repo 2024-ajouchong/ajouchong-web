@@ -17,3 +17,35 @@
     background-color: rgb(183, 210, 245); /* 선의 색상 */
     margin-top: 15px; /* 제목과 선 사이의 여백 */
 }
+.audit-container{
+     max-width: 30%;
+     align-content: center;
+     justify-content: center;
+     padding-left: 35%;
+     padding-top: 50px;
+     padding-bottom: 100px;
+ }
+
+.audit-container li{
+    margin: 30px;
+    text-decoration: none;
+    background-color: #282c34;
+    border-radius: 6px;
+    list-style-type: none;
+    padding: 30px;
+    margin-bottom: 50px;
+}
+
+.audit-container li:hover{
+    background-color: #e8e8e8;
+    a {
+        color: #282c34;
+    }
+}
+.audit-container a{
+    text-decoration: none;
+    color:#e8e8e8;
+}
+
+
+
