@@ -1,6 +1,7 @@
 import React, {  useState, useEffect }  from 'react';
 import './Header.css';
 import { useLocation } from 'react-router-dom';
+import Breadcrumb from './Breadcrumb';
 
 const Header = () => {
     const [dropdown, setDropdown] = useState(null);
@@ -36,6 +37,22 @@ const Header = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, [location]);
+
+    const getNavtitle = () => {
+        switch (location.pathname) {
+            case '/about':
+                return '총학생회 소개';
+            case '/promise':
+                return '공약 소개';
+            // Add more cases as needed
+            default:
+                return '';
+        }
+    };
+
+    const navtitle = getNavtitle();
+    const isMainPage = location.pathname === '/';
+    const isIntroductionActive = ['/about', '/promise', '/sub3', '/sub4', '/sub5'].includes(location.pathname);
     // document.addEventListener('scroll', function () {
     //     const header = document.querySelector('.header');
     //     if (window.scrollY > 0) {
@@ -93,14 +110,14 @@ const Header = () => {
                             onMouseEnter={() => handleMouseEnter('introduction')}
                             onMouseLeave={handleMouseLeave}
                         >
-                            <div className="navtitle" href="/introduction">소개</div>
+                            <div  className={`navtitle ${isIntroductionActive ? 'active' : ''}`}  href="/introduction">소개</div>
                             {dropdown === 'introduction' && (
                                 <ul className="dropdown-container">
                                     <li><a href="/about">총학생회 소개</a></li>
                                     <li><a href="/promise">공약 소개</a></li>
-                                    <li><a href="#sub3">조직도</a></li>
-                                    <li><a href="#sub4">인사말</a></li>
-                                    <li><a href="#sub5">오시는 길</a></li>
+                                    <li><a href="/organization">조직도</a></li>
+                                    <li><a href="/greeting">인사말</a></li>
+                                    <li><a href="/map">오시는 길</a></li>
                                 </ul>
                             )}
                         </li>
@@ -160,7 +177,8 @@ const Header = () => {
                 </div>
             </div>
         </header>
-
+            {/*{!isMainPage && <Breadcrumb />}*/}
+            {/*{location.pathname !== '/' && <Breadcrumb navtitle={navtitle} />}*/}
         </div>
     );
 }
