@@ -27,7 +27,11 @@ const Breadcrumb = () => {
         audit:"감사자료",
         welfare:"학생복지",
         promotion:"제휴백과",
-        rental:"대여사업"
+        rental:"대여사업",
+        signin:"로그인",
+        join:"회원가입",
+        password:"비밀번호 찾기",
+        pwchange:"비밀번호 변경"
 
     };
     const getBreadcrumbTitle = (path) => {

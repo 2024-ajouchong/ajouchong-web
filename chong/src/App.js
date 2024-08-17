@@ -19,6 +19,11 @@ import Proceeding from "./pages/Proceeding";
 import Audit from "./pages/Audit";
 import Promotion from "./pages/Promotion";
 import Rental from "./pages/Rental";
+import Signin from "./pages/Signin";
+import Join from "./pages/Join";
+import Password from "./pages/Password";
+import Passwordchange from "./pages/Pwchange";
+
 
 
 
@@ -67,6 +72,12 @@ const Content = () => {
                 <Route path="/welfare" element={<Sitemap />} />
                 <Route path="/welfare/promotion" element={<Promotion />} />
                 <Route path="/welfare/rental" element={<Rental />} />
+                <Route path="/signin" element={<Signin />} />
+                <Route path="/join" element={<Join />} />
+                <Route path="/password" element={<Password />} />
+                <Route path="/pwchange" element={<Passwordchange />} />
+
+
 
 
 

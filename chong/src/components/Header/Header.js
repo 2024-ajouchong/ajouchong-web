@@ -89,7 +89,7 @@ const Header = () => {
                     <ul>
                         <li><a href="/sitemap">사이트맵</a></li>
                         <span className="dot"> • </span>
-                        <li><a href="/login">로그인</a></li>
+                        <li><a href="/signin">로그인</a></li>
                     </ul>
                 </nav>
 
@@ -169,7 +169,7 @@ const Header = () => {
                     </ul>
                 </nav>
                 <div className="button">
-                    <a href="#log-in">Sign In</a>
+                    <a href="/signin">Sign In</a>
                 </div>
             </div>
         </header>
