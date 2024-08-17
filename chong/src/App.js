@@ -25,19 +25,15 @@ import Password from "./pages/Password";
 import Passwordchange from "./pages/Pwchange";
 
 
-
-
-
-
-
-
 function App() {
   return (
       <Router>
           <div className="App">
+              <div className="wrapper">
               <Header />
               <Content />
               <Footer />
+              </div>
           </div>
       </Router>
   );
@@ -76,12 +72,6 @@ const Content = () => {
                 <Route path="/join" element={<Join />} />
                 <Route path="/password" element={<Password />} />
                 <Route path="/pwchange" element={<Passwordchange />} />
-
-
-
-
-
-
             </Routes>
         </>
     );

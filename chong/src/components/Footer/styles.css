@@ -3,12 +3,15 @@
     padding: 50px;
     border-top: 1px solid #e9ecef;
     bottom: 0px;
-    /*position: absolute;*/
-    width: 100%;
-    position:relative;
-    transform: translateY(0%);
-    display: flex;
+    /*position:relative;*/
+    /*transform: translateY(0%);*/
 
+    /*display: flex;*/
+    /*position : relative;*/
+    /*transform : translateY(300%);*/
+    height: 200px;
+    position : relative;
+    transform : translateY(100%);
 }
 .main {
     display: flex; /* 좌우 정렬 */
@@ -19,7 +22,6 @@
     max-width: 1200px;
     margin: 0 auto; /* 가운데 정렬을 위해 */
     flex-wrap: wrap;
-
 }
 
 .mainleft {
