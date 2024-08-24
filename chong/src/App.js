@@ -29,11 +29,11 @@ function App() {
   return (
       <Router>
           <div className="App">
-              <div className="wrapper">
+              {/*<div className="wrapper">*/}
               <Header />
               <Content />
               <Footer />
-              </div>
+              {/*</div>*/}
           </div>
       </Router>
   );
