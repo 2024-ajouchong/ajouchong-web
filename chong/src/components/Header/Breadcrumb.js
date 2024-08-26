@@ -31,7 +31,8 @@ const Breadcrumb = () => {
         signin:"로그인",
         join:"회원가입",
         password:"비밀번호 찾기",
-        pwchange:"비밀번호 변경"
+        pwchange:"비밀번호 변경",
+        campusmap: '캠퍼스 맵'
 
     };
     const getBreadcrumbTitle = (path) => {

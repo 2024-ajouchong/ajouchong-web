@@ -23,6 +23,7 @@ import Signin from "./pages/Signin";
 import Join from "./pages/Join";
 import Password from "./pages/Password";
 import Passwordchange from "./pages/Pwchange";
+import Campusmap from "./pages/Campusmap";
 
 
 function App() {
@@ -54,6 +55,7 @@ const Content = () => {
                 <Route path="/introduction/organization" element={<Organization />} />
                 <Route path="/introduction/promise" element={<PromiseComponent />} />
                 <Route path="/introduction/map" element={<Map />} />
+                <Route path="/introduction/campusmap" element={<Campusmap />} />
                 <Route path="/introduction" element={<Sitemap />} />
                 <Route path="/news" element={<Sitemap />} />
                 <Route path="/news/announcement" element={<Announcement />} />
@@ -72,6 +74,7 @@ const Content = () => {
                 <Route path="/join" element={<Join />} />
                 <Route path="/password" element={<Password />} />
                 <Route path="/pwchange" element={<Passwordchange />} />
+
             </Routes>
         </>
     );

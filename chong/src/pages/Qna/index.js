@@ -14,6 +14,7 @@ const Qna = () => {
         { id: 9, title: '아홉 번째 공지사항', author: '관리자', date: '2024-08-09', views: '답변완료' },
         { id: 10, title: '열 번째 공지사항', author: '관리자', date: '2024-08-08', views: '답변완료' },
     ];
+
     const postsPerPage = 9;
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -26,6 +27,7 @@ const Qna = () => {
     const handleClick = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
+
     return (
         <div className="context">
             <div className="contextTitle">Q&A</div>
@@ -51,7 +53,7 @@ const Qna = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {posts.map(post => (
+                {currentPosts.map(post => ( // 현재 페이지에 해당하는 게시물만 표시
                     <tr key={post.id}>
                         <td>{post.id}</td>
                         <td>{post.title}</td>
@@ -62,28 +64,19 @@ const Qna = () => {
                 ))}
                 </tbody>
             </table>
+
             <div className="pagination">
-                <button
-                    onClick={() => handleClick(currentPage - 1)}
-                    disabled={currentPage === 1}
-                >
-                    이전
-                </button>
+
                 {Array.from({length: totalPages}, (_, index) => (
                     <button
                         key={index + 1}
                         onClick={() => handleClick(index + 1)}
-                        disabled={currentPage === index + 1}
+                        className={`pagination-button ${currentPage === index + 1 ? 'active' : ''}`}
                     >
                         {index + 1}
                     </button>
                 ))}
-                <button
-                    onClick={() => handleClick(currentPage + 1)}
-                    disabled={currentPage === totalPages}
-                >
-                    다음
-                </button>
+
             </div>
 
         </div>
