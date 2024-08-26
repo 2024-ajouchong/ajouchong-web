@@ -24,6 +24,7 @@ import Join from "./pages/Join";
 import Password from "./pages/Password";
 import Passwordchange from "./pages/Pwchange";
 import Campusmap from "./pages/Campusmap";
+import Commu from "./pages/commu";
 
 
 function App() {
@@ -62,6 +63,7 @@ const Content = () => {
                 <Route path="/news/planning" element={<Planning />} />
                 <Route path="/communication" element={<Sitemap />} />
                 <Route path="/communication/qna" element={<Qna />} />
+                <Route path="/communication/commu" element={<Commu />} />
                 <Route path="/communication/require" element={<Require />} />
                 <Route path="/resources" element={<Sitemap />} />
                 <Route path="/resources/bylaws" element={<Bylaws />} />

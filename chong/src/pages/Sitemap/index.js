@@ -18,6 +18,7 @@ const Sitemap = () => {
                             <li><Link to="/introduction/promise">공약 소개</Link></li>
                             <li><Link to="/introduction/organization">조직도</Link></li>
                             <li><Link to="/introduction/map">오시는 길</Link></li>
+                            <li><Link to="/introduction/sitemap">사이트 맵</Link></li>
                         </ul>
                     </div>
                     {/*<hr className="listSeparator"/>*/}
@@ -36,6 +37,7 @@ const Sitemap = () => {
                         <ul>
                             <li><Link to="/communication/qna">Q&A</Link></li>
                             <li><Link to="/communication/require">100인 안건 상정제</Link></li>
+                            <li><Link to="/communication/commu">통합 소통 창구</Link></li>
                         </ul>
                     </li>
 

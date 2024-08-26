@@ -78,7 +78,7 @@ const Header = () => {
             <div className="upper">
                 <nav className="upnav-menu">
                     <ul>
-                        <li><a href="#https://www.ajou.ac.kr/">아주대학교</a></li>
+                        <li><a href="https://www.ajou.ac.kr/">아주대학교</a></li>
                         <span className="dot"> • </span>
                         <li><a href="https://mportal.ajou.ac.kr/">아주대 포탈</a></li>
                         <span className="dot"> • </span>
@@ -138,7 +138,8 @@ const Header = () => {
                             {dropdown === 'communication' && (
                                 <ul className="dropdown-container">
                                     <li><a href="/communication/qna">Q&A</a></li>
-                                    <li><a href="/communication/require">100인 안건 상정제</a></li>
+                                    <li><a href="/communication/require">100인  안건  상정제</a></li>
+                                    <li><a href="/communication/commu">통합 소통 창구</a></li>
                                 </ul>
                             )}
                         </li>
