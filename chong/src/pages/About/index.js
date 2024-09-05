@@ -1,7 +1,23 @@
 import './styles.css';
-import React, { useEffect } from 'react';
+import axios from "axios";
+import React, { useEffect, useState } from 'react';
 
 const About = (props, context) => {
+
+    const [imageUrl, setImageUrl] = useState('');
+
+    useEffect(() => {
+        // Fetch the image URL from the API using axios
+        axios.get('/about/introduce')
+            .then(response => {
+                // Assuming the response has a structure like { imageUrl: "url_here" }
+                setImageUrl(response.data.imageUrl);
+            })
+            .catch(error => {
+                console.error('Error fetching the image URL:', error);
+            });
+    }, []);
+
     return (
         <div className="context">
                 <div className="contextTitle">총학생회 소개</div>
@@ -9,6 +25,7 @@ const About = (props, context) => {
                 <img
                     className="aboutImg"
                     src='/chairman.png'
+                    // src={imageUrl}
                     alt="ajouchong"
                 />
             <div className="aboutTextBox">

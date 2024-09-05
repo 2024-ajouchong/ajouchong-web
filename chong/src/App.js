@@ -59,7 +59,7 @@ const Content = () => {
                 <Route path="/introduction/campusmap" element={<Campusmap />} />
                 <Route path="/introduction" element={<Sitemap />} />
                 <Route path="/news" element={<Sitemap />} />
-                <Route path="/news/announcement" element={<Announcement />} />
+                <Route path="/notice" element={<Announcement />} />
                 <Route path="/news/planning" element={<Planning />} />
                 <Route path="/communication" element={<Sitemap />} />
                 <Route path="/communication/qna" element={<Qna />} />

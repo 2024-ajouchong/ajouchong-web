@@ -14,7 +14,7 @@ const Breadcrumb = () => {
         organization: '조직도',
         greeting:"인사말",
         map: "오시는 길",
-        announcement:"공지사항",
+        notice:"공지사항",
         planning:"학사일정",
         news:"소식",
         sitemap:"사이트맵",
