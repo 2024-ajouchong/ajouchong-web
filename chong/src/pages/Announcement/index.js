@@ -5,6 +5,8 @@ import './styles.css';
 
 const Announcement = () => {
     const [posts, setPosts] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [filteredPosts, setFilteredPosts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const postsPerPage = 9;
 
@@ -23,6 +25,7 @@ const Announcement = () => {
                         date: new Date(post.npCreateTime).toLocaleDateString(),
                     }));
                     setPosts(fetchedPosts);
+                    setFilteredPosts(fetchedPosts); // 초기에는 전체 게시물 표시
                 } else {
                     console.error('Error fetching data:', response.data.message);
                 }
@@ -34,11 +37,21 @@ const Announcement = () => {
         fetchPosts();
     }, []);
 
-    const totalPosts = posts.length;
+    const handleSearch = () => {
+        if (searchQuery === '') {
+            setFilteredPosts(posts); // 검색어가 없으면 전체 게시물 표시
+        } else {
+            // 검색어가 포함된 모든 제목을 가진 게시물 표시
+            const matchedPosts = posts.filter(post => post.title.toLowerCase().includes(searchQuery.toLowerCase()));
+            setFilteredPosts(matchedPosts);
+        }
+    };
+
+    const totalPosts = filteredPosts.length;
     const totalPages = Math.ceil(totalPosts / postsPerPage);
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -47,32 +60,44 @@ const Announcement = () => {
             <div className="contextTitle">공지사항</div>
             <hr className="titleSeparator" />
 
+            <div className="search-container">
+                <input
+                    type="text"
+                    placeholder="제목을 입력하여 검색"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="search-input"
+                />
+                <button onClick={handleSearch} className="search-button">검색</button>
+            </div>
+
             <div className="posts-container">
-                {currentPosts.map(post => (
-                    <div className="post-box" key={post.id}>
-                        <Link to={`/notice/${post.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                            <img
-                                src={post.imageUrl}
-                                alt={post.title || '공지사항 이미지'}
-                                className="post-image"
-                                onError={(e) => {
-                                    e.target.onerror = null;
-                                    e.target.src = '/main/aurum_square.jpeg';
-                                }}
-                                style={{ cursor: 'pointer' }}
-                            />
-                        </Link>
-                        <Link to={`/notice/${post.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                            <div
-                                className="post-title"
-                                style={{ cursor: 'pointer' }}
-                            >
-                                {post.title}
-                            </div>
-                        </Link>
-                        <div className="post-date">{post.date}</div>
-                    </div>
-                ))}
+                {currentPosts.length > 0 ? (
+                    currentPosts.map(post => (
+                        <div className="post-box" key={post.id}>
+                            <Link to={`/notice/${post.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                <img
+                                    src={post.imageUrl}
+                                    alt={post.title || '공지사항 이미지'}
+                                    className="post-image"
+                                    onError={(e) => {
+                                        e.target.onerror = null;
+                                        e.target.src = '/main/aurum_square.jpeg';
+                                    }}
+                                    style={{ cursor: 'pointer' }}
+                                />
+                            </Link>
+                            <Link to={`/notice/${post.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                <div className="post-title" style={{ cursor: 'pointer' }}>
+                                    {post.title}
+                                </div>
+                            </Link>
+                            <div className="post-date">{post.date}</div>
+                        </div>
+                    ))
+                ) : (
+                    <div className="no-results">일치하는 게시물이 없습니다.</div>
+                )}
             </div>
 
             <div className="pagination">

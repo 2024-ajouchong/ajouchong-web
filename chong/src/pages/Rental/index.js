@@ -15,6 +15,14 @@ const Rental = () => {
                 {/*    <li><a href="#대여사업"> > 대여사업 바로가기 </a></li>*/}
 
                 {/*</ul>*/}
+                <div className="rental-info">
+                    <div id="retal-title">총학생회 대여 사업 안내</div>
+                    <hr className="tableSeparator"/>
+                    <img className="rentalimg" src="/main/대여사업.jpg"/>
+                    <img className="rentalimg" src="/main/대여사업2.jpg"/>
+
+                </div>
+
             </div>
         </div>
     );

@@ -76,5 +76,23 @@
     color:#e8e8e8;
 }
 
+#retal-title{
+    font-size: 20px;
+    font-weight: bolder;
+    margin-top: 100px;
+}
+.tableSeparator{
+   width: 300px;
+    border: none; /* 기본 테두리 제거 */
+    height: 2px; /* 선의 두께 */
+    background-color: rgb(183, 210, 245); /* 선의 색상 */
+    margin-top: 15px; /* 제목과 선 사이의 여백 */
+    margin-bottom: 30px;
+}
+.rentalimg{
+
+    width: 450px;
+    height:450px;
+}
 
 

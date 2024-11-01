@@ -40,10 +40,10 @@
 .search-button {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #c6e1fb;
+    background-color: rgb(198, 225, 251);
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
 }
 
@@ -233,6 +233,47 @@
     width: 24px; /* 이미지 크기 설정 */
     height: 24px;
 }
+
+/*.search-container {*/
+/*    margin: 10px 20px;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    gap: 10px;*/
+/*}*/
+
+/*.search-input {*/
+/*    width: 70%;*/
+/*    max-width: 400px;*/
+/*    padding: 10px;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 5px;*/
+/*    font-size: 16px;*/
+/*}*/
+
+/*.search-button {*/
+/*    padding: 5px 5px;*/
+/*    font-size: 10px;*/
+/*    border: none;*/
+/*    border-radius: 5px;*/
+/*    background-color: #007bff;*/
+/*    color: #fff;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.3s ease;*/
+/*}*/
+
+/*.search-button:hover {*/
+/*    background-color: rgba(145, 145, 145, 0.2);*/
+/*}*/
+
+/*.no-results {*/
+
+/*    color: #888;*/
+/*    margin-top: 20px;*/
+/*    font-size: 18px;*/
+/*    text-align: center;*/
+/*}*/
+
 
 
 

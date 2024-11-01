@@ -18,9 +18,11 @@ const Map = () => {
         // Kakao Maps API 스크립트 로드
         if (!window.kakao || !window.kakao.maps) {
             const script = document.createElement('script');
-            script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_APP_KEY&autoload=false`;
+            script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=42fccd709a486ca4c67c989badd72a15&autoload=false`;
+            script.async = true;
+            script.defer = true;
             script.onload = () => {
-                window.kakao.maps.load(loadKakaoMap); // 로드 후 콜백
+                window.kakao.maps.load(loadKakaoMap); // 스크립트 로드 후 맵 생성
             };
             document.head.appendChild(script);
         } else {
@@ -33,7 +35,7 @@ const Map = () => {
             <div className="contextTitle">오시는 길</div>
             <hr className="titleSeparator" />
             <div className="map-container">
-                <div className="map" id="map" style={{ width: '40%', height: '400px' }}></div>
+                <div className="map" id="map" ></div>
                 <div className="map-info">
                     <div className="map-subinfo">* 주소: 경기 수원시 원천동 아주대학교 신학생회관 208호</div>
                     <div className="map-subinfo">* 연락처: 총학생회장 이홍서 010-5613-0359</div>
