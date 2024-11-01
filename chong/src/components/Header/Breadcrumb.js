@@ -20,6 +20,7 @@ const Breadcrumb = () => {
         sitemap:"사이트맵",
         communication:"소통",
         qna:"Q&A",
+        write:"글 작성",
         require:"100인 안건 상정제",
         resources:"자료실",
         bylaws:"세칙 및 회칙",

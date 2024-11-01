@@ -9,7 +9,8 @@ import About from './pages/About';
 import Organization from "./pages/Organization";
 import PromiseComponent from "./pages/Promise";
 import Map from "./pages/Map";
-import Announcement from "./pages/Announcement";
+import Announcement from "./pages/Announcement/index";
+import AnnouncementDetail from './pages/Announcement/AnnouncementDetail';
 import Planning from "./pages/Planning";
 import Sitemap from "./pages/Sitemap";
 import Qna from "./pages/Qna";
@@ -25,6 +26,10 @@ import Password from "./pages/Password";
 import Passwordchange from "./pages/Pwchange";
 import Campusmap from "./pages/Campusmap";
 import Commu from "./pages/commu";
+import WritePage from './pages/WritePage';
+import QnaDetail from "./pages/Qna/QnaDetail";
+import BylawsDetail from "./pages/Bylaws/BylawsDetail";
+import PostDetail from './pages/PostDetail'
 
 
 function App() {
@@ -59,14 +64,18 @@ const Content = () => {
                 <Route path="/introduction/campusmap" element={<Campusmap />} />
                 <Route path="/introduction" element={<Sitemap />} />
                 <Route path="/news" element={<Sitemap />} />
-                <Route path="/notice" element={<Announcement />} />
+                <Route path="/news/notice" element={<Announcement />} />
+                <Route path="/notice/:id" element={<AnnouncementDetail />} />
                 <Route path="/news/planning" element={<Planning />} />
                 <Route path="/communication" element={<Sitemap />} />
                 <Route path="/communication/qna" element={<Qna />} />
+                <Route path="/communication/qna/:postId" element={<QnaDetail />} /> {/* QnaDetail 라우트 추가 */}
+                <Route path="/communication/qna/write" element={<WritePage />} />
                 <Route path="/communication/commu" element={<Commu />} />
                 <Route path="/communication/require" element={<Require />} />
                 <Route path="/resources" element={<Sitemap />} />
                 <Route path="/resources/bylaws" element={<Bylaws />} />
+                <Route path="/resources/bylaws/:id" element={<BylawsDetail />} />
                 <Route path="/resources/proceeding" element={<Proceeding />} />
                 <Route path="/resources/audit" element={<Audit />} />
                 <Route path="/welfare" element={<Sitemap />} />

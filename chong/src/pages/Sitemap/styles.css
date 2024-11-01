@@ -32,7 +32,9 @@
 }
 
 .sitemap {
-    padding: 60px 500px; /* 좌우 패딩을 줄여서 가운데 정렬 */
+    /*padding: 60px 500px; !* 좌우 패딩을 줄여서 가운데 정렬 *!*/
+    margin-left: auto; /* 중앙 정렬 */
+    margin-right: auto; /* 중앙 정렬 */
     font-family: Arial, sans-serif;
 }
 
@@ -44,7 +46,7 @@
 .list-container {
     margin-bottom: 20px;
     width: 300px; /* 전체 너비를 차지하도록 설정 */
-    /*max-width: 300px; !* 최대 너비 설정 *!*/
+    min-width: 300px; /* 최대 너비 설정 */
     padding: 20px;
     background-color: rgba(198, 225, 251, 0.16); /* 배경색 */
     justify-content: center;

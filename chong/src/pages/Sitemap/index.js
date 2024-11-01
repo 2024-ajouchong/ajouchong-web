@@ -27,7 +27,7 @@ const Sitemap = () => {
                         <hr className="listSeparator"/>
                         <ul>
                             <li><Link to="/news/announcement">공지사항</Link></li>
-                            <li><Link to="/news/planning">학사일정</Link></li>
+                            {/*<li><Link to="/news/planning">학사일정</Link></li>*/}
                         </ul>
                     </li>
 

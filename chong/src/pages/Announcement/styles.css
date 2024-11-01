@@ -1,11 +1,11 @@
-.context{
+.context {
     font-family: Arial, sans-serif;
     margin: 0;
     margin-top: 10%;
     padding: 0;
 }
 
-.contextTitle{
+.contextTitle .post-title{
     font-size: 25px;
     font-weight: bolder;
 }
@@ -63,11 +63,13 @@
 .posts-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 가로로 3개씩 배치 */
-    gap: 1px; /* 박스 간격 */
+    gap: 3px; /* 박스 간격 */
     justify-items: center;
     padding: 30px;
     width: 70%;
     margin: 0 auto;
+
+
 }
 
 /* 게시글 박스 디자인 */
@@ -80,25 +82,7 @@
 }
 
 /* 게시글 이미지 */
-.post-image {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-}
 
-/* 게시글 제목 */
-.post-title {
-    padding-top: 20px;
-    padding-bottom: 10px;
-}
-
-/* 게시글 작성 날짜 */
-.post-date {
-    color: #888;
-    font-size: 12px;
-    margin-bottom: 20px;
-    margin-top: 0;
-}
 .pagination {
     display: flex;
     justify-content: center;
@@ -126,3 +110,132 @@
 .pagination-button:hover {
     background-color: #e2e6ea;
 }
+
+.post-image-container {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.default-image {
+    width: 100%;
+    height: 250px;
+    background-color: black;
+}
+.post-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.post-detail {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+
+}
+
+.post-metadata {
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    color: #555;
+    margin: 30px 0;
+
+}
+
+.post-metadata span {
+    margin-right: 10px;
+}
+
+
+/* 게시글 작성 날짜 */
+.post-date {
+    color: #888;
+    font-size: 12px;
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+
+.back-button {
+    margin-top: 100px;
+    padding: 10px 30px;
+    font-size: 16px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(104, 104, 104); /* 텍스트 색상 변경 */
+    border: 1px solid #a5a5a5; /* border를 solid로 명확히 지정 */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.back-button:hover{
+    background-color: rgba(145, 145, 145, 0.2);
+    color: #535353;
+}
+
+.post-content {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
+    margin-top: 45px;
+    white-space: pre-wrap;
+}
+
+
+
+.post-images {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* 가운데 정렬 */
+    gap: 20px;
+    margin-top: 20px;
+}
+
+
+.post-images img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 2px;
+
+}
+
+.like-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.like-button {
+    background-color: transparent;
+    border: none;
+    color: #e63946;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: transform 0.2s ease;
+}
+
+.like-button:hover {
+    transform: scale(1.1);
+}
+
+.like-count {
+    margin-left: 8px;
+    font-size: 16px;
+    color: #888888;
+}
+.like-icon {
+    width: 24px; /* 이미지 크기 설정 */
+    height: 24px;
+}
+
+
+
+
+
+

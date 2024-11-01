@@ -1,5 +1,6 @@
 import './styles.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import {useNavigate} from "react-router-dom";
 
 const Require = () => {
     const posts = [
@@ -33,16 +34,22 @@ const Require = () => {
     return (
         <div className="context">
             <div className="contextTitle">100인 안건 상정제</div>
-            <hr className="titleSeparator" />
+            <hr className="titleSeparator"/>
 
-            <div className="search-container">
-                <input
-                    type="text"
-                    placeholder="검색어를 입력하세요"
-                    className="search-input"
-                />
-                <button className="search-button">검색</button>
+            <div className="write-container">
+                <button className="write-button" >
+                    글 작성하기
+                </button>
             </div>
+
+            {/*<div className="search-container">*/}
+            {/*    <input*/}
+            {/*        type="text"*/}
+            {/*        placeholder="검색어를 입력하세요"*/}
+            {/*        className="search-input"*/}
+            {/*    />*/}
+            {/*    <button className="search-button">검색</button>*/}
+            {/*</div>*/}
 
             <table className="announcement-table">
                 <thead>
@@ -69,7 +76,7 @@ const Require = () => {
 
             <div className="pagination">
 
-                {Array.from({ length: totalPages }, (_, index) => (
+                {Array.from({length: totalPages}, (_, index) => (
                     <button
                         key={index + 1}
                         onClick={() => handleClick(index + 1)}

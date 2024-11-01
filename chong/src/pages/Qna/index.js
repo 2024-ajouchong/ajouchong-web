@@ -1,22 +1,48 @@
+// Qna.js
 import './styles.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import QnaDetail from './QnaDetail';
 
 const Qna = () => {
-    const posts = [
-        { id: 1, title: '첫 번째 공지사항', author: '관리자', date: '2024-08-17', views: '대기중' },
-        { id: 2, title: '두 번째 공지사항', author: '관리자', date: '2024-08-16', views: '대기중' },
-        { id: 3, title: '세 번째 공지사항', author: '관리자', date: '2024-08-15', views: '답변완료' },
-        { id: 4, title: '네 번째 공지사항', author: '관리자', date: '2024-08-14', views: '답변완료' },
-        { id: 5, title: '다섯 번째 공지사항', author: '관리자', date: '2024-08-13', views: '대기중' },
-        { id: 6, title: '여섯 번째 공지사항', author: '관리자', date: '2024-08-12', views: '답변완료' },
-        { id: 7, title: '일곱 번째 공지사항', author: '관리자', date: '2024-08-11', views: '답변완료' },
-        { id: 8, title: '여덟 번째 공지사항', author: '관리자', date: '2024-08-10', views: '대기중' },
-        { id: 9, title: '아홉 번째 공지사항', author: '관리자', date: '2024-08-09', views: '답변완료' },
-        { id: 10, title: '열 번째 공지사항', author: '관리자', date: '2024-08-08', views: '답변완료' },
-    ];
-
-    const postsPerPage = 9;
+    const [posts, setPosts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [selectedPostId, setSelectedPostId] = useState(null);
+    const postsPerPage = 9;
+
+    const navigate = useNavigate();
+
+
+    useEffect(() => {
+        const fetchPosts = async () => {
+            try {
+                const response = await fetch('http://ajouchong.com:8080/api/qna');
+                const result = await response.json();
+
+                if (result.code === 1) {
+                    setPosts(result.data.map(post => ({
+                        id: post.qpostId,
+                        title: post.qpTitle,
+                        date: new Date(post.qpCreateTime).toLocaleString("ko-KR", {
+                            year: "numeric",
+                            month: "2-digit",
+                            day: "2-digit",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            second: "2-digit",
+                        }), // 밀리초 없이 날짜 및 시간 형식으로 변환
+                        views: post.replied ? '답변완료' : '대기중'
+                    })));
+                } else {
+                    console.error('데이터를 불러오는 중 오류 발생:', result.message);
+                }
+            } catch (error) {
+                console.error('API 요청 오류:', error);
+            }
+        };
+
+        fetchPosts();
+    }, []);
 
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -28,57 +54,70 @@ const Qna = () => {
         setCurrentPage(pageNumber);
     };
 
+    const goToWritePage = () => {
+        navigate('/communication/qna/write'); // 해당 경로로 이동
+    };
+
+
+    const handlePostClick = (postId) => {
+        setSelectedPostId(postId);
+    };
+
+    const handleBackToList = () => {
+        setSelectedPostId(null);
+    };
+
     return (
         <div className="context">
             <div className="contextTitle">Q&A</div>
             <hr className="titleSeparator"/>
 
-            <div className="search-container">
-                <input
-                    type="text"
-                    placeholder="검색어를 입력하세요"
-                    className="search-input"
-                />
-                <button className="search-button">검색</button>
-            </div>
+            {selectedPostId ? (
+                <QnaDetail postId={selectedPostId} onBack={handleBackToList} />
+            ) : (
+                <>
+                    <div className="write-container">
+                        <button className="write-button" onClick={goToWritePage} >
+                            글 작성하기
+                        </button>
+                    </div>
 
-            <table className="announcement-table">
-                <thead>
-                <tr>
-                    <th>번호</th>
-                    <th>제목</th>
-                    <th>작성자</th>
-                    <th>날짜</th>
-                    <th>상태</th>
-                </tr>
-                </thead>
-                <tbody>
-                {currentPosts.map(post => ( // 현재 페이지에 해당하는 게시물만 표시
-                    <tr key={post.id}>
-                        <td>{post.id}</td>
-                        <td>{post.title}</td>
-                        <td>{post.author}</td>
-                        <td>{post.date}</td>
-                        <td>{post.views}</td>
-                    </tr>
-                ))}
-                </tbody>
-            </table>
+                    <table className="announcement-table">
+                        <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>제목</th>
+                            <th>작성자</th>
+                            <th>날짜</th>
+                            <th>상태</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {currentPosts.map(post => (
+                            <tr key={post.id} onClick={() => handlePostClick(post.id)}>
+                                <td>{post.id}</td>
+                                <td>{post.title}</td>
+                                <td>{post.author || '익명'}</td>
+                                <td>{post.date}</td>
+                                <td>{post.views}</td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
 
-            <div className="pagination">
-
-                {Array.from({length: totalPages}, (_, index) => (
-                    <button
-                        key={index + 1}
-                        onClick={() => handleClick(index + 1)}
-                        className={`pagination-button ${currentPage === index + 1 ? 'active' : ''}`}
-                    >
-                        {index + 1}
-                    </button>
-                ))}
-
-            </div>
-
+                    <div className="pagination">
+                        {Array.from({ length: totalPages }, (_, index) => (
+                            <button
+                                key={index + 1}
+                                onClick={() => handleClick(index + 1)}
+                                className={`pagination-button ${currentPage === index + 1 ? 'active' : ''}`}
+                            >
+                                {index + 1}
+                            </button>
+                        ))}
+                    </div>
+                </>
+            )}
         </div>
     );
 }

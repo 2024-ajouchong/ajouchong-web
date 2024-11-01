@@ -125,8 +125,8 @@ const Header = () => {
                             <div className={`navtitle ${isNewsActive ? 'active' : ''}`} href="/news">소식</div>
                             {dropdown === 'news' && (
                                 <ul className="dropdown-container">
-                                    <li><a href="/notice">공지사항</a></li>
-                                    <li><a href="/news/planning">학사일정</a></li>
+                                    <li><a href="/news/notice">공지사항</a></li>
+                                    {/*<li><a href="/news/planning">학사일정</a></li>*/}
                                 </ul>
                             )}
                         </li>
