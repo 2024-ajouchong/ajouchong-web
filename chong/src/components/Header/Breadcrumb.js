@@ -31,6 +31,7 @@ const Breadcrumb = () => {
         rental:"대여사업",
         signin:"로그인",
         join:"회원가입",
+        personalinfo:"회원 정보 입력",
         password:"비밀번호 찾기",
         pwchange:"비밀번호 변경",
         campusmap: '캠퍼스 맵',

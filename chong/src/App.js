@@ -29,6 +29,8 @@ import Commu from "./pages/commu";
 import WritePage from './pages/WritePage';
 import QnaDetail from "./pages/Qna/QnaDetail";
 import BylawsDetail from "./pages/Bylaws/BylawsDetail";
+import PromotionDetail from "./pages/Promotion/promotionDetail";
+import PersonalInfo from "./pages/Join/PersonalInfo";
 import PostDetail from './pages/PostDetail'
 
 
@@ -80,11 +82,13 @@ const Content = () => {
                 <Route path="/resources/audit" element={<Audit />} />
                 <Route path="/welfare" element={<Sitemap />} />
                 <Route path="/welfare/promotion" element={<Promotion />} />
+                <Route path="/welfare/promotion/:postId" element={<PromotionDetail />} />
                 <Route path="/welfare/rental" element={<Rental />} />
                 <Route path="/signin" element={<Signin />} />
                 <Route path="/join" element={<Join />} />
                 <Route path="/password" element={<Password />} />
                 <Route path="/pwchange" element={<Passwordchange />} />
+                <Route path="/personal-info" element={<PersonalInfo />} />
 
             </Routes>
         </>

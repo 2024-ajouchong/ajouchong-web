@@ -1,26 +1,60 @@
 import './styles.css';
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Join = () => {
+    const [isAgreed, setIsAgreed] = useState(false);
+    const navigate = useNavigate();
+
+    const handleAgreementChange = (e) => {
+        setIsAgreed(e.target.checked);
+    };
+
+    const handleJoinClick = () => {
+        if (isAgreed) {
+            navigate('/personal-info');
+        }
+    };
+
     return (
         <div className="context">
             <div className="contextTitle">AJOU UNIV</div>
             <img className="signinlogo" src="/aurum_black.png" alt="Ajou University Logo"/>
 
-            <div className="signin-container">
-                <input type="text" placeholder="e-mail" className="signin-input"/>
-                <input type="password" placeholder="password" className="signin-input"/>
-                <button className="signin-button">Sign In</button>
+            <div className="agreementSection">
+                <label className="agreementLabel">
+                    <input
+                        type="checkbox"
+                        checked={isAgreed}
+                        onChange={handleAgreementChange}
+                    />
+                    개인정보 이용에 동의합니다.
+                </label>
             </div>
 
-            <div className="findpw">
-                <a href="/join">회원가입</a>
-                <span className="space">|</span>
-                <a href="/password">비밀번호 찾기</a>
-
-            </div>
-
-
+            <button
+                className="joinButton"
+                onClick={handleJoinClick}
+                disabled={!isAgreed}
+                style={{
+                    backgroundColor: isAgreed ? "#282c34" : "#a9a9a9",
+                    width: "135px",
+                    height: "35px",
+                    textDecoration: "none",
+                    textAlign: "center",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    right: "20px",
+                    borderRadius: "10px",
+                    border:"none",
+                    display: "flex",
+                    color: "#fdfdfd",
+                    marginRight: "30px",
+                    padding: "0"
+                }}
+            >
+                회원가입
+            </button>
         </div>
     );
 }
