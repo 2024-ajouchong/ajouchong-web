@@ -1,3 +1,4 @@
+// src/pages/PromotionDetail.js
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -27,6 +28,10 @@ const PromotionDetail = () => {
                         imageUrls: post.imageUrls.length ? post.imageUrls : ['/default-image.jpg']
                     });
                     setLikeCount(post.psUserLikeCnt);
+
+                    // Check if user has liked this post before
+                    const likedPosts = JSON.parse(localStorage.getItem('likedPosts')) || {};
+                    setLiked(!!likedPosts[postId]);
                 } else {
                     console.error('게시글 조회 오류:', response.data.message);
                 }
@@ -40,16 +45,24 @@ const PromotionDetail = () => {
 
     const handleLike = async () => {
         if (!liked) {
-            try {
-                const response = await axios.post(`http://ajouchong.com:8080/api/partnership/${postId}/like`);
-                if (response.data.code === 1) {
-                    setLikeCount(likeCount + 1);
-                    setLiked(true);
-                } else {
-                    console.error("좋아요 오류:", response.data.message);
+            const userConfirmed = window.confirm('해당 안건에 공감하시겠습니까?');
+            if (userConfirmed) {
+                try {
+                    const response = await axios.post(`http://ajouchong.com:8080/api/partnership/${postId}/like`);
+                    if (response.data.code === 1) {
+                        setLikeCount(likeCount + 1);
+                        setLiked(true);
+
+                        // Save liked state in local storage
+                        const likedPosts = JSON.parse(localStorage.getItem('likedPosts')) || {};
+                        likedPosts[postId] = true;
+                        localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+                    } else {
+                        console.error("좋아요 오류:", response.data.message);
+                    }
+                } catch (error) {
+                    console.error("API 요청 오류:", error);
                 }
-            } catch (error) {
-                console.error("API 요청 오류:", error);
             }
         }
     };
