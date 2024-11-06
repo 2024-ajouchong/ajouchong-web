@@ -18,6 +18,12 @@ const AnnouncementDetail = () => {
                 if (response.data.code === 1) {
                     setPostDetails(response.data.data);
                     setLikeCount(response.data.data.npUserLikeCnt); // 초기 좋아요 수 설정
+
+                    // Check if this post has already been liked
+                    const storedLikeStatus = localStorage.getItem(`liked_${id}`);
+                    if (storedLikeStatus === 'true') {
+                        setLiked(true); // Set the liked state from localStorage
+                    }
                 } else {
                     console.error('Error fetching post details:', response.data.message);
                 }
@@ -31,20 +37,23 @@ const AnnouncementDetail = () => {
 
     const handleLike = async () => {
         if (!liked) {
-            try {
-                const response = await axios.post(`http://ajouchong.com:8080/api/notice/${id}/like`);
-                if (response.data.code === 1) {
-                    setLikeCount(likeCount + 1); // 좋아요 수 증가
-                    setLiked(true); // 좋아요 클릭 상태로 변경
-                } else {
-                    console.error("Error liking the post:", response.data.message);
+            const confirmLike = window.confirm("해당 안건에 공감하시겠습니까?");
+            if (confirmLike) {
+                try {
+                    const response = await axios.post(`http://ajouchong.com:8080/api/notice/${id}/like`);
+                    if (response.data.code === 1) {
+                        setLikeCount(likeCount + 1); // 좋아요 수 증가
+                        setLiked(true); // 좋아요 클릭 상태로 변경
+                        localStorage.setItem(`liked_${id}`, 'true'); // Store like status in localStorage
+                    } else {
+                        console.error("Error liking the post:", response.data.message);
+                    }
+                } catch (error) {
+                    console.error("API request error:", error);
                 }
-            } catch (error) {
-                console.error("API request error:", error);
             }
         }
     };
-
 
     if (!postDetails) {
         return <div>Loading...</div>;
@@ -56,10 +65,9 @@ const AnnouncementDetail = () => {
             <hr className="titleSeparator"/>
             <div className="post-metadata">
                 <span>작성일 | {new Date(postDetails.npCreateTime).toLocaleString()}</span>
-                <span>조회수 | {postDetails.qpHitCnt}</span>
+                <span>조회수 | {postDetails.npHitCnt}</span>
             </div>
             <p className="post-content">{postDetails.npContent}</p>
-
 
             <div className="post-images">
                 {postDetails.imageUrls && postDetails.imageUrls.length > 0 ? (

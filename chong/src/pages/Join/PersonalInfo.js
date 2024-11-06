@@ -47,28 +47,29 @@ const PersonalInfo = () => {
     return (
         <div className="context">
             <h2>개인정보 입력</h2>
+            <hr className="titleSeparator"/>
 
             <form onSubmit={handleSubmit}>
                 <label>
                     이름
-                    <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+                    <input  className="personalinfo" type="text" name="name" value={formData.name} onChange={handleChange} required/>
                 </label>
-                <br />
+                <br/>
                 <label>
                     이메일
-                    <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+                    <input  className="personalinfo" type="email" name="email" value={formData.email} onChange={handleChange} required/>
                 </label>
-                <br />
+                <br/>
                 <label>
                     비밀번호
-                    <input type="password" name="password" value={formData.password} onChange={handleChange} required />
+                    <input className="personalinfo" type="password" name="password" value={formData.password} onChange={handleChange} required/>
                 </label>
-                <br />
+                <br/>
                 <label>
                     학번
-                    <input type="text" name="student_id" value={formData.student_id} onChange={handleChange} required />
+                    <input className="personalinfo" type="text" name="student_id" value={formData.student_id} onChange={handleChange} required/>
                 </label>
-                <br />
+                <br/>
                 <label>
                     학과
                     <select name="major" value={formData.major} onChange={handleChange} required>
@@ -112,7 +113,7 @@ const PersonalInfo = () => {
                         <option value="PHARM">약학대학</option>
                     </select>
                 </label>
-                <br />
+                <br/>
                 <button type="submit">회원가입</button>
             </form>
         </div>

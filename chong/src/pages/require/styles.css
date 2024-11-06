@@ -107,3 +107,31 @@
     background-color: rgb(53, 53, 53);
     color: #e8e8e8;
 }
+
+.comment-section {
+    margin-top: 80px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.comment-item {
+    padding: 10px 100px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.95rem;
+    color: #555;
+    display: flex;
+}
+
+.comment-item strong {
+    margin-right: 10px;
+    color: #333;
+}
+
+.approval-approved {
+    color: #007bff; /* Blue for approved */
+    font-weight: bold;
+}
+
+.approval-denied {
+    color: #dc3545; /* Red for denied */
+}

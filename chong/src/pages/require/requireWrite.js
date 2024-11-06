@@ -1,37 +1,37 @@
-import './styles.css';
 import React, { useState } from 'react';
 import axios from 'axios';
+import './styles.css';
 
-const QnAPost = () => {
+const RequireWrite = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [message, setMessage] = useState('');
 
     const handleSubmit = async (e) => {
-        e.preventDefault(); // 기본 폼 제출 동작 방지
+        e.preventDefault();
 
         try {
-            const response = await axios.post('http://ajouchong.com:8080/api/qna', {
-                qpTitle: title,
-                qpContent: content
+            const response = await axios.post('http://ajouchong.com:8080/api/agora', {
+                apTitle: title,
+                apContent: content
             });
 
             if (response.data.code === 1) {
-                setMessage('게시글이 게시되었습니다.'); // 성공 메시지 설정
-                setTitle(''); // 제목 입력 필드 초기화
-                setContent(''); // 내용 입력 필드 초기화
+                setMessage('게시글이 게시되었습니다.');
+                setTitle('');
+                setContent('');
             } else {
-                setMessage('게시글 작성에 실패했습니다.'); // 실패 메시지 설정
+                setMessage('게시글 작성에 실패했습니다.');
             }
         } catch (error) {
             console.error('API 요청 오류:', error);
-            setMessage('게시글 작성 중 오류가 발생했습니다.'); // 오류 메시지 설정
+            setMessage('게시글 작성 중 오류가 발생했습니다.');
         }
     };
 
     return (
         <div className="context">
-            <div className="contextTitle">QnA 작성</div>
+            <div className="contextTitle">안건 상정 글 작성</div>
             <hr className="titleSeparator"/>
 
             <form onSubmit={handleSubmit} className="qna-form">
@@ -43,6 +43,7 @@ const QnAPost = () => {
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         required
+                        placeholder="제목을 입력하세요"
                     />
                 </div>
                 <div className="form-group">
@@ -52,9 +53,10 @@ const QnAPost = () => {
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
                         required
+                        placeholder="내용을 입력하세요"
                     ></textarea>
                 </div>
-                <button type="submit" className="submit-button" >게시</button>
+                <button type="submit" className="submit-button">게시</button>
             </form>
 
             {message && <div className="message">{message}</div>}
@@ -62,4 +64,4 @@ const QnAPost = () => {
     );
 };
 
-export default QnAPost;
+export default RequireWrite;

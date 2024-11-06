@@ -1,18 +1,18 @@
-.context{
-    font-family: Arial, sans-serif;
-    margin: 0;
-    margin-top: 10%;
+/*.context{*/
+/*    font-family: Arial, sans-serif;*/
+/*    margin: 0;*/
+/*    margin-top: 10%;*/
 
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-}
+/*    padding: 0;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*}*/
 
-.contextTitle{
-    font-size: 25px;
-    font-weight: bolder;
+/*.contextTitle{*/
+/*    font-size: 25px;*/
+/*    font-weight: bolder;*/
 
-}
+/*}*/
 
 .titleSeparator {
     max-width: 30%;
@@ -133,7 +133,7 @@
     margin-bottom: 20px;
 }
 
-/* 입력 필드 스타일 */
+
 form {
     display: flex;
     flex-direction: column;
@@ -147,10 +147,10 @@ label {
     font-size: 16px;
     margin-bottom: 10px;
 }
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
+.joinButton{
+    margin:10px auto;
+}
+.personalinfo {
     width: 100%;
     padding: 10px;
     margin-top: 5px;

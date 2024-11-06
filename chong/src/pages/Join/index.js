@@ -20,7 +20,7 @@ const Join = () => {
         <div className="context">
             <div className="contextTitle">AJOU UNIV</div>
             <img className="signinlogo" src="/aurum_black.png" alt="Ajou University Logo"/>
-
+            <hr className="titleSeparator"/>
             <div className="agreementSection">
                 <label className="agreementLabel">
                     <input
@@ -46,7 +46,7 @@ const Join = () => {
                     alignItems: "center",
                     right: "20px",
                     borderRadius: "10px",
-                    border:"none",
+                    border: "none",
                     display: "flex",
                     color: "#fdfdfd",
                     marginRight: "30px",

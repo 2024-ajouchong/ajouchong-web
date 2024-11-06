@@ -5,35 +5,37 @@ import axios from 'axios';
 import './styles.css';
 
 const QnaDetail = () => {
-    const { postId } = useParams(); // URL에서 postId를 추출
+    const { postId } = useParams(); // Extract postId from URL parameters
     const [postDetails, setPostDetails] = useState(null);
+    const [loading, setLoading] = useState(true); // Add loading state
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchPostDetails = async () => {
+            setLoading(true); // Start loading
             try {
-                console.log("Fetching post details for ID:", postId); // postId 확인
                 const response = await axios.get(`http://ajouchong.com:8080/api/qna/${postId}`);
-                console.log("API Response:", response.data); // API 응답 확인
-
                 if (response.data.code === 1) {
                     setPostDetails(response.data.data);
-                    console.log("Post details set successfully:", response.data.data); // postDetails 확인
                 } else {
-                    console.error('게시글 조회 오류:', response.data.message);
+                    console.error('Error fetching post details:', response.data.message);
                 }
             } catch (error) {
-                console.error('API 요청 오류:', error);
+                console.error('API request error:', error);
+            } finally {
+                setLoading(false); // End loading regardless of success or failure
             }
         };
 
-        if (postId) {
-            fetchPostDetails(); // postId가 존재할 때만 API 요청 실행
-        }
+        if (postId) fetchPostDetails(); // Only fetch data if postId exists
     }, [postId]);
 
-    if (!postDetails) {
+    if (loading) {
         return <div>Loading...</div>;
+    }
+
+    if (!postDetails) {
+        return <div>No post details found.</div>;
     }
 
     return (
@@ -43,10 +45,11 @@ const QnaDetail = () => {
             <div className="post-metadata">
                 <span>작성일 | {new Date(postDetails.qpCreateTime).toLocaleString()}</span>
                 <span>조회수 | {postDetails.qpHitCnt}</span>
+                <span>좋아요 | {postDetails.qpUserLikeCnt}</span>
             </div>
             <p className="post-content">{postDetails.qpContent}</p>
 
-            {/* 상태와 답변 표시 */}
+            {/* Status and Answer */}
             <div className="post-answer">
                 <strong>상태:</strong> {postDetails.replied ? '답변 완료' : '대기 중'}
                 <p>{postDetails.answer || '답변이 아직 없습니다.'}</p>

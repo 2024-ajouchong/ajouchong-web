@@ -49,7 +49,7 @@ textarea {
     color: #ffffff;
     font-size: 16px;
     font-weight: 400;
-    width: 150px; /* Width adjusted for centering */
+    width: 100%; /* Matches the width of the input fields */
     border: none;
     border-radius: 9px;
     cursor: pointer;

@@ -32,6 +32,8 @@ import BylawsDetail from "./pages/Bylaws/BylawsDetail";
 import PromotionDetail from "./pages/Promotion/promotionDetail";
 import PersonalInfo from "./pages/Join/PersonalInfo";
 import PostDetail from './pages/PostDetail'
+import RequireWrite from "./pages/require/requireWrite";
+import RequireDetail from "./pages/require/RequireDetail";
 
 
 function App() {
@@ -75,6 +77,8 @@ const Content = () => {
                 <Route path="/communication/qna/write" element={<WritePage />} />
                 <Route path="/communication/commu" element={<Commu />} />
                 <Route path="/communication/require" element={<Require />} />
+                <Route path="/communication/require/write" element={<RequireWrite />} />
+                <Route path="/communication/require/:id" element={<RequireDetail />} />
                 <Route path="/resources" element={<Sitemap />} />
                 <Route path="/resources/bylaws" element={<Bylaws />} />
                 <Route path="/resources/bylaws/:id" element={<BylawsDetail />} />

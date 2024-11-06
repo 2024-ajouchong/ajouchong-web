@@ -1,55 +1,87 @@
 import './styles.css';
 import React, { useState, useEffect } from 'react';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 const Require = () => {
-    const posts = [
-        { id: 1, title: '첫 번째 공지사항', author: '관리자', date: '2024-08-17', views: '가결' },
-        { id: 2, title: '두 번째 공지사항', author: '관리자', date: '2024-08-16', views: '부결' },
-        { id: 3, title: '세 번째 공지사항', author: '관리자', date: '2024-08-15', views: '가결' },
-        { id: 4, title: '네 번째 공지사항', author: '관리자', date: '2024-08-14', views: '가결' },
-        { id: 5, title: '다섯 번째 공지사항', author: '관리자', date: '2024-08-13', views: '부결' },
-        { id: 6, title: '여섯 번째 공지사항', author: '관리자', date: '2024-08-12', views: '가결' },
-        { id: 7, title: '일곱 번째 공지사항', author: '관리자', date: '2024-08-11', views: '부결' },
-        { id: 8, title: '여덟 번째 공지사항', author: '관리자', date: '2024-08-10', views: '가결' },
-        { id: 9, title: '아홉 번째 공지사항', author: '관리자', date: '2024-08-09', views: '가결' },
-        { id: 10, title: '열 번째 공지사항', author: '관리자', date: '2024-08-08', views: '부결' },
-    ];
+    const [posts, setPosts] = useState([]);
+    const [searchQuery, setSearchQuery] = useState(''); // State for search query
+    const [filteredPosts, setFilteredPosts] = useState([]);
+    const postsPerPage = 9;
+    const [currentPage, setCurrentPage] = useState(1);
+    const navigate = useNavigate();
 
-    const postsPerPage = 9; // 한 페이지당 보여줄 게시물 수
-    const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
+    useEffect(() => {
+        const fetchPosts = async () => {
+            try {
+                const response = await axios.get('http://ajouchong.com:8080/api/agora');
+                if (response.data.code === 1) {
+                    const fetchedPosts = response.data.data.map(post => ({
+                        id: post.apostId,
+                        title: post.apTitle,
+                        author: '관리자',
+                        date: new Date(post.createTime).toLocaleDateString(),
+                        views: post.approve ? '가결' : '부결',
+                    }));
+                    setPosts(fetchedPosts);
+                    setFilteredPosts(fetchedPosts); // Initialize filtered posts
+                } else {
+                    console.error('데이터를 불러오는 중 오류 발생:', response.data.message);
+                }
+            } catch (error) {
+                console.error('API 요청 오류:', error);
+            }
+        };
 
-    // 현재 페이지에 해당하는 게시물 계산
+        fetchPosts();
+    }, []);
+
+    // Handle search input change
+    const handleSearchChange = (e) => {
+        setSearchQuery(e.target.value);
+        if (e.target.value === '') {
+            setFilteredPosts(posts); // Reset filtered posts if search is cleared
+        }
+    };
+
+    // Filter posts based on search query
+    const handleSearch = () => {
+        const matchedPosts = posts.filter(post =>
+            post.title.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        setFilteredPosts(matchedPosts);
+        setCurrentPage(1); // Reset to first page of results
+    };
+
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+    const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
 
-    const totalPages = Math.ceil(posts.length / postsPerPage); // 전체 페이지 수 계산
-
-    // 페이지 변경 함수
-    const handleClick = (pageNumber) => {
-        setCurrentPage(pageNumber);
-    };
+    const handleClick = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
         <div className="context">
             <div className="contextTitle">100인 안건 상정제</div>
             <hr className="titleSeparator"/>
 
+
+            <div className="search-container">
+                <input
+                    type="text"
+                    placeholder="제목을 입력하여 검색"
+                    value={searchQuery}
+                    onChange={handleSearchChange}
+                    className="search-input"
+                />
+                <button onClick={handleSearch} className="search-button">검색</button>
+            </div>
+
             <div className="write-container">
-                <button className="write-button" >
+                <button className="write-button" onClick={() => navigate('/communication/require/write')}>
                     글 작성하기
                 </button>
             </div>
-
-            {/*<div className="search-container">*/}
-            {/*    <input*/}
-            {/*        type="text"*/}
-            {/*        placeholder="검색어를 입력하세요"*/}
-            {/*        className="search-input"*/}
-            {/*    />*/}
-            {/*    <button className="search-button">검색</button>*/}
-            {/*</div>*/}
 
             <table className="announcement-table">
                 <thead>
@@ -65,7 +97,14 @@ const Require = () => {
                 {currentPosts.map(post => (
                     <tr key={post.id}>
                         <td>{post.id}</td>
-                        <td>{post.title}</td>
+                        <td>
+                                <span
+                                    className="title-link"
+                                    onClick={() => navigate(`/communication/require/${post.id}`)}
+                                >
+                                    {post.title}
+                                </span>
+                        </td>
                         <td>{post.author}</td>
                         <td>{post.date}</td>
                         <td>{post.views}</td>
@@ -75,7 +114,6 @@ const Require = () => {
             </table>
 
             <div className="pagination">
-
                 {Array.from({length: totalPages}, (_, index) => (
                     <button
                         key={index + 1}
@@ -85,7 +123,6 @@ const Require = () => {
                         {index + 1}
                     </button>
                 ))}
-
             </div>
         </div>
     );

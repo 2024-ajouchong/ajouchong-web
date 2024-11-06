@@ -84,16 +84,18 @@ const Qna = () => {
             <div className="contextTitle">Q&A</div>
             <hr className="titleSeparator" />
 
-            <div className="search-container">
-                <input
-                    type="text"
-                    placeholder="제목을 입력하여 검색"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="search-input"
-                />
-                <button onClick={handleSearch} className="search-button">검색</button>
-            </div>
+            {!selectedPostId && (
+                <div className="search-container">
+                    <input
+                        type="text"
+                        placeholder="제목을 입력하여 검색"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="search-input"
+                    />
+                    <button onClick={handleSearch} className="search-button">검색</button>
+                </div>
+            )}
 
             {selectedPostId ? (
                 <QnaDetail postId={selectedPostId} onBack={handleBackToList} />
