@@ -31,6 +31,8 @@ const Breadcrumb = () => {
         rental:"대여사업",
         signin:"로그인",
         join:"회원가입",
+        policy:"개인정보처리방침",
+        termsofservice:"이용약관",
         personalinfo:"회원 정보 입력",
         password:"비밀번호 찾기",
         pwchange:"비밀번호 변경",

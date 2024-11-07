@@ -37,6 +37,7 @@
 
 .rental-box {
     height: 500px;
+    margin-top: 40px;
     width: 800px;
     background-color: #d5ecff;
     display: flex;
@@ -94,5 +95,21 @@
     width: 450px;
     height:450px;
 }
+.rental-button {
+    display: inline-block;
+    background-color: #000000;
+    color: #ffffff;
+    margin-top: 50px;
+    padding: 10px 40px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
+.rental-button:hover {
+    background-color: #d8b8de; /* 호버 시 색상 변경 */
+}
 

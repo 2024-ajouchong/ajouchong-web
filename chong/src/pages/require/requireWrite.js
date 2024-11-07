@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './styles.css';
 
@@ -6,9 +7,14 @@ const RequireWrite = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [message, setMessage] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Confirmation alert before posting
+        const confirmPost = window.confirm('글을 게시하시겠습니까?');
+        if (!confirmPost) return;
 
         try {
             const response = await axios.post('http://ajouchong.com:8080/api/agora', {
@@ -27,6 +33,10 @@ const RequireWrite = () => {
             console.error('API 요청 오류:', error);
             setMessage('게시글 작성 중 오류가 발생했습니다.');
         }
+    };
+
+    const handleBackToPosts = () => {
+        navigate('/communication/require'); // Adjust the path as needed
     };
 
     return (
@@ -60,6 +70,10 @@ const RequireWrite = () => {
             </form>
 
             {message && <div className="message">{message}</div>}
+
+            <button onClick={handleBackToPosts} className="back-button">
+                게시글로 돌아가기
+            </button>
         </div>
     );
 };

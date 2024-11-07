@@ -1,11 +1,15 @@
 import React, {  useState, useEffect }  from 'react';
 import './Header.css';
-import { useLocation } from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
 import Breadcrumb from './Breadcrumb';
+import axios from 'axios';
 
 const Header = () => {
     const [dropdown, setDropdown] = useState(null);
     const location = useLocation();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const navigate = useNavigate();
+
 
     const handleMouseEnter = (menu) => {
         setDropdown(menu);
@@ -37,6 +41,32 @@ const Header = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, [location]);
+
+    useEffect(() => {
+        // Check for token on component load to set initial login status
+        const token = localStorage.getItem('token');
+        setIsLoggedIn(!!token);
+    }, [location]);
+
+    const handleLogout = async () => {
+        const confirmLogout = window.confirm('로그아웃 하시겠습니까?');
+        if (confirmLogout) {
+            try {
+                const response = await axios.post('http://ajouchong.com:8080/api/auth/logout');
+                if (response.data.code === 1) {
+                    // Successful logout: update state, clear token, redirect to sign-in
+                    setIsLoggedIn(false);
+                    localStorage.removeItem('token');
+                    navigate('/');
+                } else {
+                    console.error('Logout error:', response.data.message);
+                }
+            } catch (error) {
+                console.error('Logout request failed:', error);
+            }
+        }
+    };
+
 
     const getNavtitle = () => {
         switch (location.pathname) {
@@ -89,7 +119,11 @@ const Header = () => {
                     <ul>
                         <li><a href="/sitemap">사이트맵</a></li>
                         <span className="dot"> • </span>
-                        <li><a href="/signin">로그인</a></li>
+                        {isLoggedIn ? (
+                            <li onClick={handleLogout} style={{ cursor: 'pointer' }}>로그아웃</li>
+                        ) : (
+                            <li><a href="/signin">로그인</a></li>
+                        )}
                     </ul>
                 </nav>
 
@@ -107,7 +141,9 @@ const Header = () => {
                             onMouseEnter={() => handleMouseEnter('introduction')}
                             onMouseLeave={handleMouseLeave}
                         >
-                            <div  className={`navtitle ${isIntroductionActive ? 'active' : ''}`}  href="/introduction">소개</div>
+                            <div className={`navtitle ${isIntroductionActive ? 'active' : ''}`}
+                                 href="/introduction">소개
+                            </div>
                             {dropdown === 'introduction' && (
                                 <ul className="dropdown-container">
                                     <li><a href="/introduction/about">총학생회 소개</a></li>
@@ -134,11 +170,13 @@ const Header = () => {
                             onMouseEnter={() => handleMouseEnter('communication')}
                             onMouseLeave={handleMouseLeave}
                         >
-                            <div className={`navtitle ${isCommunicationActive ? 'active' : ''}`} href="/communication">소통</div>
+                            <div className={`navtitle ${isCommunicationActive ? 'active' : ''}`}
+                                 href="/communication">소통
+                            </div>
                             {dropdown === 'communication' && (
                                 <ul className="dropdown-container">
                                     <li><a href="/communication/qna">Q&A</a></li>
-                                    <li><a href="/communication/require">100인  안건  상정제</a></li>
+                                    <li><a href="/communication/require">100인 안건 상정제</a></li>
                                     <li><a href="/communication/commu">통합 소통 창구</a></li>
                                 </ul>
                             )}
@@ -160,7 +198,9 @@ const Header = () => {
                             onMouseEnter={() => handleMouseEnter('welfare')}
                             onMouseLeave={handleMouseLeave}
                         >
-                            <div className={`navtitle ${isWelfareActive ? 'active' : ''}`} href="/student-welfare">학생복지</div>
+                            <div className={`navtitle ${isWelfareActive ? 'active' : ''}`}
+                                 href="/student-welfare">학생복지
+                            </div>
                             {dropdown === 'welfare' && (
                                 <ul className="dropdown-container">
                                     <li><a href="/welfare/promotion">제휴백과</a></li>
@@ -171,7 +211,11 @@ const Header = () => {
                     </ul>
                 </nav>
                 <div className="button">
-                    <a href="/signin">Sign In</a>
+                    {isLoggedIn ? (
+                        <button onClick={handleLogout} style={{cursor: 'pointer'}}>Sign Out</button>
+                    ) : (
+                        <a href="/signin">Sign In</a>
+                    )}
                 </div>
             </div>
         </header>
