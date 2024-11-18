@@ -11,7 +11,7 @@ const Signin = () => {
 
     const handleSignIn = async () => {
         try {
-            const response = await axios.post('http://ajouchong.com:8080/api/auth/login', {
+            const response = await axios.post('https://www.ajouchong.com/api/auth/login', {
                 email,
                 password
             });

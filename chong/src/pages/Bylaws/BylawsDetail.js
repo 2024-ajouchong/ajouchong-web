@@ -12,7 +12,7 @@ const BylawsDetail = () => {
     useEffect(() => {
         const fetchPostDetails = async () => {
             try {
-                const response = await axios.get(`http://ajouchong.com:8080/api/data/${id}`);
+                const response = await axios.get(`https://www.ajouchong.com/api/data/${id}`);
                 if (response.data.code === 1) {
                     setPostDetails(response.data.data);
                 } else {

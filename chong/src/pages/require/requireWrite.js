@@ -17,7 +17,7 @@ const RequireWrite = () => {
         if (!confirmPost) return;
 
         try {
-            const response = await axios.post('http://ajouchong.com:8080/api/agora', {
+            const response = await axios.post('https://www.ajouchong.com/api/agora', {
                 apTitle: title,
                 apContent: content
             });

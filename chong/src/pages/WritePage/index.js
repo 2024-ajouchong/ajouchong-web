@@ -16,7 +16,7 @@ const QnAPost = () => {
         if (!confirmSubmit) return;
 
         try {
-            const response = await axios.post('http://ajouchong.com:8080/api/qna', {
+            const response = await axios.post('https://www.ajouchong.com/api/qna', {
                 qpTitle: title,
                 qpContent: content
             });

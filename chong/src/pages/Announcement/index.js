@@ -13,7 +13,7 @@ const Announcement = () => {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await axios.get("http://ajouchong.com:8080/api/notice", {
+                const response = await axios.get("https://www.ajouchong.com/api/notice", {
                     headers: { 'Content-Type': 'application/json' },
                 });
 

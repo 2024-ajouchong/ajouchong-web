@@ -34,6 +34,10 @@ import PersonalInfo from "./pages/Join/PersonalInfo";
 import PostDetail from './pages/PostDetail'
 import RequireWrite from "./pages/require/requireWrite";
 import RequireDetail from "./pages/require/RequireDetail";
+import GoogleOAuthHandler from './components/GoogleOAuthHandler';
+import Termsofservice from "./pages/Policy/termsofservice";
+import Policy from "./pages/Policy/policy";
+
 
 
 function App() {
@@ -60,6 +64,9 @@ const Content = () => {
             {showBreadcrumb && <Breadcrumb />}
             <Routes>
                 <Route path="/" element={<Main />} />
+                <Route path="/auth/callback" element={<GoogleOAuthHandler />} />
+                <Route path="/policy/termsofservice" element={<Termsofservice />} />
+                <Route path="/policy" element={<Policy />} />
                 <Route path="/sitemap" element={<Sitemap />} />
                 <Route path="/introduction/about" element={<About />} />
                 <Route path="/introduction/organization" element={<Organization />} />
@@ -69,6 +76,7 @@ const Content = () => {
                 <Route path="/introduction" element={<Sitemap />} />
                 <Route path="/news" element={<Sitemap />} />
                 <Route path="/news/notice" element={<Announcement />} />
+
                 <Route path="/notice/:id" element={<AnnouncementDetail />} />
                 <Route path="/news/planning" element={<Planning />} />
                 <Route path="/communication" element={<Sitemap />} />

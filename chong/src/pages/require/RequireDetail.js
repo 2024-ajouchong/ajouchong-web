@@ -15,7 +15,7 @@ const RequireDetail = () => {
     useEffect(() => {
         const fetchPostDetails = async () => {
             try {
-                const response = await axios.get(`http://ajouchong.com:8080/api/agora/${id}`);
+                const response = await axios.get(`https://www.ajouchong.com/api/agora/${id}`);
                 if (response.data.code === 1) {
                     const post = response.data.data;
                     setPostDetails(post);
@@ -40,7 +40,7 @@ const RequireDetail = () => {
             const confirmLike = window.confirm("해당 안건에 공감하시겠습니까?");
             if (confirmLike) {
                 try {
-                    const response = await axios.post(`http://ajouchong.com:8080/api/agora/${id}/like`);
+                    const response = await axios.post(`https://www.ajouchong.com/api/agora/${id}/like`);
                     if (response.data.code === 1) {
                         const newLikeCount = likeCount + 1;
                         const isApproved = newLikeCount >= 100;

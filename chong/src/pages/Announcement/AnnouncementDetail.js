@@ -7,22 +7,21 @@ import './styles.css';
 const AnnouncementDetail = () => {
     const { id } = useParams();
     const [postDetails, setPostDetails] = useState(null);
-    const [likeCount, setLikeCount] = useState(0); // 좋아요 수 상태
-    const [liked, setLiked] = useState(false); // 좋아요 클릭 여부 상태
+    const [likeCount, setLikeCount] = useState(0);
+    const [liked, setLiked] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchPostDetails = async () => {
             try {
-                const response = await axios.get(`http://ajouchong.com:8080/api/notice/${id}`);
+                const response = await axios.get(`https://www.ajouchong.com/api/notice/${id}`);
                 if (response.data.code === 1) {
                     setPostDetails(response.data.data);
-                    setLikeCount(response.data.data.npUserLikeCnt); // 초기 좋아요 수 설정
+                    setLikeCount(response.data.data.npUserLikeCnt);
 
-                    // Check if this post has already been liked
                     const storedLikeStatus = localStorage.getItem(`liked_${id}`);
                     if (storedLikeStatus === 'true') {
-                        setLiked(true); // Set the liked state from localStorage
+                        setLiked(true);
                     }
                 } else {
                     console.error('Error fetching post details:', response.data.message);
@@ -37,14 +36,14 @@ const AnnouncementDetail = () => {
 
     const handleLike = async () => {
         if (!liked) {
-            const confirmLike = window.confirm("해당 안건에 공감하시겠습니까?");
+            const confirmLike = window.confirm("해당 게시글에 공감하시겠습니까?");
             if (confirmLike) {
                 try {
-                    const response = await axios.post(`http://ajouchong.com:8080/api/notice/${id}/like`);
+                    const response = await axios.post(`https://www.ajouchong.com/api/notice/${id}/like`);
                     if (response.data.code === 1) {
-                        setLikeCount(likeCount + 1); // 좋아요 수 증가
-                        setLiked(true); // 좋아요 클릭 상태로 변경
-                        localStorage.setItem(`liked_${id}`, 'true'); // Store like status in localStorage
+                        setLikeCount(prevCount => prevCount + 1); // Increment like count
+                        setLiked(true);
+                        localStorage.setItem(`liked_${id}`, 'true');
                     } else {
                         console.error("Error liking the post:", response.data.message);
                     }
@@ -72,16 +71,17 @@ const AnnouncementDetail = () => {
             <div className="post-images">
                 {postDetails.imageUrls && postDetails.imageUrls.length > 0 ? (
                     postDetails.imageUrls.map((url, index) => (
-                        <img key={index} src={url} alt={`Image ${index + 1}`}/>
+                        <img key={index} src={url} alt={`Image ${index + 1}`} />
                     ))
                 ) : (
-                    <img src="/main/aurum_square.jpeg" alt="/main/aurum_square.jpeg"/>
+                    <img src="/main/aurum_square.jpeg" alt="Default" />
                 )}
             </div>
+
             <div className="like-section">
                 <button onClick={handleLike} className="like-button" disabled={liked}>
                     <img
-                        src={liked ? "/main/filled-heart.png" : "/main/heart.png"} // 좋아요 상태에 따라 이미지 변경
+                        src={liked ? "/main/filled-heart.png" : "/main/heart.png"}
                         alt="좋아요"
                         className="like-icon"
                     />

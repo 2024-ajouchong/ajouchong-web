@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const Require = () => {
     const [posts, setPosts] = useState([]);
-    const [searchQuery, setSearchQuery] = useState(''); // State for search query
+    const [searchQuery, setSearchQuery] = useState('');
     const [filteredPosts, setFilteredPosts] = useState([]);
     const postsPerPage = 9;
     const [currentPage, setCurrentPage] = useState(1);
@@ -14,7 +14,7 @@ const Require = () => {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await axios.get('http://ajouchong.com:8080/api/agora');
+                const response = await axios.get('https://www.ajouchong.com/api/agora');
                 if (response.data.code === 1) {
                     const fetchedPosts = response.data.data.map(post => ({
                         id: post.apostId,
@@ -24,7 +24,7 @@ const Require = () => {
                         views: post.approve ? '가결' : '부결',
                     }));
                     setPosts(fetchedPosts);
-                    setFilteredPosts(fetchedPosts); // Initialize filtered posts
+                    setFilteredPosts(fetchedPosts);
                 } else {
                     console.error('데이터를 불러오는 중 오류 발생:', response.data.message);
                 }
@@ -36,21 +36,19 @@ const Require = () => {
         fetchPosts();
     }, []);
 
-    // Handle search input change
     const handleSearchChange = (e) => {
         setSearchQuery(e.target.value);
         if (e.target.value === '') {
-            setFilteredPosts(posts); // Reset filtered posts if search is cleared
+            setFilteredPosts(posts);
         }
     };
 
-    // Filter posts based on search query
     const handleSearch = () => {
         const matchedPosts = posts.filter(post =>
             post.title.toLowerCase().includes(searchQuery.toLowerCase())
         );
         setFilteredPosts(matchedPosts);
-        setCurrentPage(1); // Reset to first page of results
+        setCurrentPage(1);
     };
 
     const indexOfLastPost = currentPage * postsPerPage;
@@ -64,7 +62,6 @@ const Require = () => {
         <div className="context">
             <div className="contextTitle">100인 안건 상정제</div>
             <hr className="titleSeparator"/>
-
 
             <div className="search-container">
                 <input
@@ -98,23 +95,29 @@ const Require = () => {
                     <tr key={post.id}>
                         <td>{post.id}</td>
                         <td>
-                                <span
-                                    className="title-link"
-                                    onClick={() => navigate(`/communication/require/${post.id}`)}
-                                >
-                                    {post.title}
-                                </span>
+                            <span
+                                className="title-link"
+                                onClick={() => navigate(`/communication/require/${post.id}`)}
+                            >
+                                {post.title}
+                            </span>
                         </td>
                         <td>{post.author}</td>
                         <td>{post.date}</td>
-                        <td>{post.views}</td>
+                        <td>
+                            <span
+                                className={`status ${post.views === '가결' ? 'approved' : 'rejected'}`}
+                            >
+                                {post.views}
+                            </span>
+                        </td>
                     </tr>
                 ))}
                 </tbody>
             </table>
 
             <div className="pagination">
-                {Array.from({length: totalPages}, (_, index) => (
+                {Array.from({ length: totalPages }, (_, index) => (
                     <button
                         key={index + 1}
                         onClick={() => handleClick(index + 1)}

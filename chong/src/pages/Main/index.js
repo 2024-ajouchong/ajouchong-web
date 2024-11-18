@@ -31,7 +31,7 @@ const Main = () => {
     useEffect(() => {
         const fetchNotices = async () => {
             try {
-                const response = await axios.get("http://ajouchong.com:8080/api/notice");
+                const response = await axios.get("https://www.ajouchong.com/api/notice");
                 console.log("API Response:", response.data);
 
                 if (response.data.code === 1 && Array.isArray(response.data.data)) {
@@ -135,13 +135,18 @@ const Main = () => {
                                     }}
                                 />
                                 <h3>{notice.title}</h3>
-                                <p>{notice.content}</p>
+                                <p>
+                                    {notice.content.length > 30
+                                        ? `${notice.content.slice(0, 30)}...`
+                                        : notice.content}
+                                </p>
                                 <span>{notice.date}</span>
                             </div>
                         ))
                     ) : (
                         <p>공지사항이 없습니다.</p>
                     )}
+
                 </div>
             </div>
         </div>

@@ -1,14 +1,37 @@
 import React, {  useState, useEffect }  from 'react';
 import './Header.css';
 import { useNavigate,useLocation } from 'react-router-dom';
+
 import Breadcrumb from './Breadcrumb';
 import axios from 'axios';
 
 const Header = () => {
     const [dropdown, setDropdown] = useState(null);
     const location = useLocation();
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    // const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigate = useNavigate();
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const handleGoogleLogin = () => {
+        const clientId = '440712020433-ljqa7d2r8drohnblmmfum3cls1et2kuq.apps.googleusercontent.com';
+        const redirectUri = 'http://localhost:8080/login/oauth2/code/google'; // Google Cloud Console에 설정된 URI와 일치해야 함
+
+        const googleAuthUrl =
+            `https://accounts.google.com/o/oauth2/v2/auth?` +
+            `client_id=${clientId}&` +
+            `redirect_uri=${redirectUri}&` +
+            `response_type=code&` +
+            `scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&` +
+            `hd=ajou.ac.kr`;
+
+        window.location.href = googleAuthUrl;
+    };
+
+    const handleLogout = () => {
+        setIsLoggedIn(false);
+        alert('Logged out successfully');
+    };
 
 
     const handleMouseEnter = (menu) => {
@@ -48,24 +71,24 @@ const Header = () => {
         setIsLoggedIn(!!token);
     }, [location]);
 
-    const handleLogout = async () => {
-        const confirmLogout = window.confirm('로그아웃 하시겠습니까?');
-        if (confirmLogout) {
-            try {
-                const response = await axios.post('http://ajouchong.com:8080/api/auth/logout');
-                if (response.data.code === 1) {
-                    // Successful logout: update state, clear token, redirect to sign-in
-                    setIsLoggedIn(false);
-                    localStorage.removeItem('token');
-                    navigate('/');
-                } else {
-                    console.error('Logout error:', response.data.message);
-                }
-            } catch (error) {
-                console.error('Logout request failed:', error);
-            }
-        }
-    };
+    // const handleLogout = async () => {
+    //     const confirmLogout = window.confirm('로그아웃 하시겠습니까?');
+    //     if (confirmLogout) {
+    //         try {
+    //             const response = await axios.post('http://ajouchong.com:8080/api/auth/logout');
+    //             if (response.data.code === 1) {
+    //                 // Successful logout: update state, clear token, redirect to sign-in
+    //                 setIsLoggedIn(false);
+    //                 localStorage.removeItem('token');
+    //                 navigate('/');
+    //             } else {
+    //                 console.error('Logout error:', response.data.message);
+    //             }
+    //         } catch (error) {
+    //             console.error('Logout request failed:', error);
+    //         }
+    //     }
+    // };
 
 
     const getNavtitle = () => {
@@ -122,7 +145,8 @@ const Header = () => {
                         {isLoggedIn ? (
                             <li onClick={handleLogout} style={{ cursor: 'pointer' }}>로그아웃</li>
                         ) : (
-                            <li><a href="/signin">로그인</a></li>
+                            // 로그인 버튼 클릭 시 Google OAuth로 이동
+                            <li onClick={handleGoogleLogin} style={{ cursor: 'pointer' }}>로그인</li>
                         )}
                     </ul>
                 </nav>
@@ -210,11 +234,11 @@ const Header = () => {
                         </li>
                     </ul>
                 </nav>
-                <div className="button">
+                <div className="button" >
                     {isLoggedIn ? (
-                        <button onClick={handleLogout} style={{cursor: 'pointer'}}>Sign Out</button>
+                        <button onClick={handleLogout} className="custom-button" style={{cursor: 'pointer'}}>Sign Out</button>
                     ) : (
-                        <a href="/signin">Sign In</a>
+                        <button onClick={handleGoogleLogin} className="custom-button" style={{ cursor: 'pointer'}}>Sign In</button>
                     )}
                 </div>
             </div>

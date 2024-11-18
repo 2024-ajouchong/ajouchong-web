@@ -11,7 +11,7 @@ const Promotion = () => {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await axios.get('http://ajouchong.com:8080/api/partnership', {
+                const response = await axios.get('https://www.ajouchong.com/api/partnership', {
                     id: 'your_id',
                     password: 'your_password'
                 });

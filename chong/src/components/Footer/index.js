@@ -29,9 +29,8 @@ const Footer = (props) => (
                     </span>
                 </div>
                 <div className="column">
-                    <span className="copyright">
-                    COPYRIGHT © Ajou University Council. All Rights Reserved.
-                    </span>
+                    <p className="copyright">&copy; {new Date().getFullYear()} Ajou University Council. All Rights Reserved.</p>
+
                 </div>
             </div>
 

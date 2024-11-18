@@ -14,7 +14,7 @@ const PromotionDetail = () => {
     useEffect(() => {
         const fetchPostDetails = async () => {
             try {
-                const response = await axios.get(`http://ajouchong.com:8080/api/partnership/${postId}`);
+                const response = await axios.get(`https://www.ajouchong.com/api/partnership/${postId}`);
                 if (response.data.code === 1) {
                     const post = response.data.data;
                     setPostDetails({
@@ -48,7 +48,7 @@ const PromotionDetail = () => {
             const userConfirmed = window.confirm('해당 안건에 공감하시겠습니까?');
             if (userConfirmed) {
                 try {
-                    const response = await axios.post(`http://ajouchong.com:8080/api/partnership/${postId}/like`);
+                    const response = await axios.post(`https://www.ajouchong.com/api/partnership/${postId}/like`);
                     if (response.data.code === 1) {
                         setLikeCount(likeCount + 1);
                         setLiked(true);

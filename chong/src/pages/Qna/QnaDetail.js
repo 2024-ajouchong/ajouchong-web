@@ -14,7 +14,7 @@ const QnaDetail = () => {
         const fetchPostDetails = async () => {
             setLoading(true); // Start loading
             try {
-                const response = await axios.get(`http://ajouchong.com:8080/api/qna/${postId}`);
+                const response = await axios.get(`https://www.ajouchong.com/api/qna/{postId}`);
                 if (response.data.code === 1) {
                     setPostDetails(response.data.data);
                 } else {

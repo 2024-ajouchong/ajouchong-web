@@ -62,6 +62,19 @@
 
 }
 
+
+/* styles.css */
+.status.approved {
+    color: blue;
+    font-weight: bold;
+}
+
+.status.rejected {
+    color: red;
+    font-weight: bold;
+}
+
+
 .pagination-button {
     border: 1px solid #ffffff;
     padding: 10px 15px;
