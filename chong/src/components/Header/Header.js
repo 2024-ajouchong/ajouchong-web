@@ -15,7 +15,7 @@ const Header = () => {
 
     const handleGoogleLogin = () => {
         const clientId = '440712020433-ljqa7d2r8drohnblmmfum3cls1et2kuq.apps.googleusercontent.com';
-        const redirectUri = 'http://localhost:8080/login/oauth2/code/google'; // Google Cloud Console에 설정된 URI와 일치해야 함
+        const redirectUri = 'http://www.ajouchong.com/login/oauth2/code/google'; // Google Cloud Console에 설정된 URI와 일치해야 함
 
         const googleAuthUrl =
             `https://accounts.google.com/o/oauth2/v2/auth?` +

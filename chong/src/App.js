@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route,useLocation } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/Header';
@@ -37,26 +37,30 @@ import RequireDetail from "./pages/require/RequireDetail";
 import GoogleOAuthHandler from './components/GoogleOAuthHandler';
 import Termsofservice from "./pages/Policy/termsofservice";
 import Policy from "./pages/Policy/policy";
-
-
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
-  return (
-      <Router>
-          <div className="App">
-              {/*<div className="wrapper">*/}
-              <Header />
-              <Content />
-              <Footer />
-              {/*</div>*/}
-          </div>
-      </Router>
-  );
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // Example state for login
+
+    useEffect(() => {
+        // Check login status, e.g., from localStorage or an API call
+        const token = localStorage.getItem('authToken'); // Example: Storing token in localStorage
+        setIsLoggedIn(!!token);
+    }, []);
+
+    return (
+        <Router>
+            <div className="App">
+                <Header />
+                <Content isLoggedIn={isLoggedIn} />
+                <Footer />
+            </div>
+        </Router>
+    );
 }
 
-const Content = () => {
+const Content = ({ isLoggedIn }) => {
     const location = useLocation();
-
     const showBreadcrumb = location.pathname !== '/';
 
     return (
@@ -76,25 +80,111 @@ const Content = () => {
                 <Route path="/introduction" element={<Sitemap />} />
                 <Route path="/news" element={<Sitemap />} />
                 <Route path="/news/notice" element={<Announcement />} />
-
                 <Route path="/notice/:id" element={<AnnouncementDetail />} />
                 <Route path="/news/planning" element={<Planning />} />
                 <Route path="/communication" element={<Sitemap />} />
-                <Route path="/communication/qna" element={<Qna />} />
-                <Route path="/communication/qna/:postId" element={<QnaDetail />} /> {/* QnaDetail 라우트 추가 */}
-                <Route path="/communication/qna/write" element={<WritePage />} />
+                <Route
+                    path="/communication/qna"
+                    element={
+                        <ProtectedRoute isLoggedIn={isLoggedIn}>
+                            <Qna />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/communication/qna/write"
+                    element={
+                        <ProtectedRoute isLoggedIn={isLoggedIn}>
+                            <WritePage />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route path="/communication/qna/:postId" element={<QnaDetail />} />
+                {/*<Route path="/communication/qna/write" element={<WritePage />} />*/}
+                <Route
+                    path="/communication/require"
+                    element={
+                        <ProtectedRoute isLoggedIn={isLoggedIn}>
+                            <Require />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/communication/require/write"
+                    element={
+                        <ProtectedRoute isLoggedIn={isLoggedIn}>
+                            <RequireWrite />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/communication/require/write/:id"
+                    element={
+                        <ProtectedRoute isLoggedIn={isLoggedIn}>
+                            <RequireDetail />
+                        </ProtectedRoute>
+                    }
+                />
                 <Route path="/communication/commu" element={<Commu />} />
-                <Route path="/communication/require" element={<Require />} />
-                <Route path="/communication/require/write" element={<RequireWrite />} />
-                <Route path="/communication/require/:id" element={<RequireDetail />} />
+                {/*<Route path="/communication/require" element={<Require />} />*/}
+                {/*<Route path="/communication/require/write" element={<RequireWrite />} />*/}
+                {/*<Route path="/communication/require/:id" element={<RequireDetail />} />*/}
                 <Route path="/resources" element={<Sitemap />} />
-                <Route path="/resources/bylaws" element={<Bylaws />} />
-                <Route path="/resources/bylaws/:id" element={<BylawsDetail />} />
-                <Route path="/resources/proceeding" element={<Proceeding />} />
-                <Route path="/resources/audit" element={<Audit />} />
+                {/*<Route path="/resources/bylaws" element={<Bylaws />} />*/}
+                <Route
+                    path="/resources/bylaws"
+                    element={
+                        <ProtectedRoute isLoggedIn={isLoggedIn}>
+                            <Bylaws />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/resources/bylaws/:id"
+                    element={
+                        <ProtectedRoute isLoggedIn={isLoggedIn}>
+                            <BylawsDetail />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/resources/proceeding"
+                    element={
+                        <ProtectedRoute isLoggedIn={isLoggedIn}>
+                            <Proceeding />
+                        </ProtectedRoute>
+                    }
+                />
+                {/*<Route path="/resources/bylaws/:id" element={<BylawsDetail />} />*/}
+                {/*<Route path="/resources/proceeding" element={<Proceeding />} />*/}
+                <Route
+                    path="/resources/audit"
+                    element={
+                        <ProtectedRoute isLoggedIn={isLoggedIn}>
+                            <Audit />
+                        </ProtectedRoute>
+                    }
+                />
+                {/*<Route path="/resources/audit" element={<Audit />} />*/}
                 <Route path="/welfare" element={<Sitemap />} />
-                <Route path="/welfare/promotion" element={<Promotion />} />
-                <Route path="/welfare/promotion/:postId" element={<PromotionDetail />} />
+                <Route
+                    path="/welfare/promotion"
+                    element={
+                        <ProtectedRoute isLoggedIn={isLoggedIn}>
+                            <Promotion />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/welfare/promotion/:postId"
+                    element={
+                        <ProtectedRoute isLoggedIn={isLoggedIn}>
+                            <PromotionDetail />
+                        </ProtectedRoute>
+                    }
+                />
+                {/*<Route path="/welfare/promotion" element={<Promotion />} />*/}
+                {/*<Route path="/welfare/promotion/:postId" element={<PromotionDetail />} />*/}
                 <Route path="/welfare/rental" element={<Rental />} />
                 <Route path="/signin" element={<Signin />} />
                 <Route path="/join" element={<Join />} />

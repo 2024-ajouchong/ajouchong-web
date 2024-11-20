@@ -22,8 +22,8 @@ const Main = () => {
     const images = [
         "/main/main_10.jpeg",
         "/main/main_9.jpeg",
-        "/main/main_1.jpg",
-        "/main/main_8.JPG",
+        // "/main/main_1.jpg",
+        // "/main/main_8.JPG",
         "/main/main_7.jpg",
     ];
 
