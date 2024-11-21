@@ -8,6 +8,7 @@
     justify-content: center;
     width: 100%;
     overflow: hidden;
+
 }
 
 .slider {
@@ -18,7 +19,6 @@
     height: 100vh; /* 화면 전체 높이를 차지하도록 설정 */
     overflow: hidden;
     position: relative;
-
 
 }
 
@@ -147,10 +147,49 @@
 
 
 }
+
+.division-line.visible {
+    opacity: 1;
+    width: 500px;
+}
+
+.more-link {
+    opacity: 0;
+    transform: translateY(20px); /* 아래에서 위로 나타나는 효과 */
+    transition: opacity 3s ease, transform 3s ease; /* 애니메이션 속성 */
+    font-size: 1rem;
+    color: rgba(135, 135, 135, 0.77);
+    text-decoration: none;
+    margin-top: 10px;.more-link {
+
+    display: inline-block;
+}
+
+    .more-link.visible {
+        opacity: 1;
+        transform: translateY(0); /* 원래 위치로 */
+    }
+
+    .more-link:hover {
+        color: #0056b3;
+    }
+    display: inline-block;
+}
+
+.more-link.visible {
+    opacity: 1;
+    transform: translateY(0); /* 원래 위치로 */
+}
+
+.more-link:hover {
+    color: #c6e1fb;
+}
 @keyframes expandLine {
     from { width: 0; }
     to { width: 500px; }
 }
+
+
 .notices-container {
     display: flex;
     justify-content: space-between;
@@ -158,13 +197,14 @@
     width: 80%;
     margin: 40px auto;
     margin-top: 40px;
-    margin-bottom: 150px;
+    /*margin-bottom: 150px;*/
 
 }
 .card-title{
     width: 100%;
     text-align: center;
-    margin-bottom: 80px;
+    margin-top: 90px;
+    margin-bottom: 50px;
     color: #5c5c5c;
     display: flex; /* flexbox 활성화 */
     flex-direction: column; /* 세로 방향으로 정렬 */
@@ -219,11 +259,15 @@
     /*transition: transform 0.3s ease;*/
     /*animation-name:fade;*/
     /*animation-duration: 5s;*/
-    transition: transform 0.3s ease, opacity 5s ease;
-    opacity: 0; /* 초기 상태: 보이지 않음 */
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    /*opacity: 0; !* 초기 상태: 보이지 않음 *!*/
     transform: translateY(20px); /* 초기 상태: 아래로 이동 */
     padding-bottom: 30px;
     cursor: pointer;
+}
+.notice-card.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .notice-card:hover {
@@ -242,6 +286,7 @@
 
 .notice-card h3 {
     margin-bottom: 10px;
+    padding: 4px;
     font-size: 1.2rem;
     color: #353535;
 }
@@ -249,6 +294,7 @@
 .notice-card p {
     font-size: 1rem;
     color: #61686c;
+    padding: 3px;
 }
 
 .notice-card span {
@@ -272,22 +318,9 @@
 
 
 
-/*.card-title p {*/
-/*    font-size: 1.8rem;*/
-/*    font-weight: bold;*/
-/*    margin-bottom: 30px;*/
-/*    opacity: 0; !* 초기 상태: 보이지 않음 *!*/
-/*    transform: translateY(20px); !* 초기 상태: 아래로 이동 *!*/
-/*    transition: opacity 3s ease, transform 3s ease;*/
-/*}*/
 
-/*.card-title span {*/
-/*    font-size: 1rem;*/
-/*    color: #636363;*/
-/*    opacity: 0; !* 초기 상태: 보이지 않음 *!*/
-/*    transform: translateY(20px); !* 초기 상태: 아래로 이동 *!*/
-/*    transition: opacity 5s ease, transform 5s ease;*/
-/*}*/
+
+
 
 
 

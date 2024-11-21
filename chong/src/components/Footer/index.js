@@ -27,11 +27,14 @@ const Footer = (props) => (
                     16399) 경기도 수원시 영통구 월드컵로 206 아주대학교 신학생회관 208호
                     총학생회실
                     </span>
+                    <span className="space"></span>
+                    <span className="developer">
+                    developer | 아주대 소프트웨어학과 22학번 오태림 (front, design) 유수정 (backend)
+                    </span>
                 </div>
                 <div className="column">
-                    <span className="copyright">
-                    COPYRIGHT © Ajou University Council. All Rights Reserved.
-                    </span>
+                    <p className="copyright">&copy; {new Date().getFullYear()} Ajou University Council. All Rights Reserved.</p>
+
                 </div>
             </div>
 

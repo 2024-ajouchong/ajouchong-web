@@ -1,8 +1,38 @@
-import React, { useState }  from 'react';
+import React, {  useState, useEffect }  from 'react';
 import './Header.css';
+import { useNavigate,useLocation } from 'react-router-dom';
+
+import Breadcrumb from './Breadcrumb';
+import axios from 'axios';
 
 const Header = () => {
     const [dropdown, setDropdown] = useState(null);
+    const location = useLocation();
+    // const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const navigate = useNavigate();
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const handleGoogleLogin = () => {
+        const clientId = '440712020433-ljqa7d2r8drohnblmmfum3cls1et2kuq.apps.googleusercontent.com';
+        const redirectUri = 'http://www.ajouchong.com/login/oauth2/code/google'; // Google Cloud Console에 설정된 URI와 일치해야 함
+
+        const googleAuthUrl =
+            `https://accounts.google.com/o/oauth2/v2/auth?` +
+            `client_id=${clientId}&` +
+            `redirect_uri=${redirectUri}&` +
+            `response_type=code&` +
+            `scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&` +
+            `hd=ajou.ac.kr`;
+
+        window.location.href = googleAuthUrl;
+    };
+
+    const handleLogout = () => {
+        setIsLoggedIn(false);
+        alert('Logged out successfully');
+    };
+
 
     const handleMouseEnter = (menu) => {
         setDropdown(menu);
@@ -11,21 +41,97 @@ const Header = () => {
     const handleMouseLeave = () => {
         setDropdown(null);
     };
-    document.addEventListener('scroll', function () {
+    useEffect(() => {
         const header = document.querySelector('.header');
-        if (window.scrollY > 0) {
+
+        const handleScroll = () => {
+            if (window.scrollY > 0) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        };
+
+        // Apply the scrolled class if not on the main page
+        if (location.pathname !== '/') {
             header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
         }
-    });
+
+        window.addEventListener('scroll', handleScroll);
+
+        // Cleanup event listener on unmount
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [location]);
+
+    useEffect(() => {
+        // Check for token on component load to set initial login status
+        const token = localStorage.getItem('token');
+        setIsLoggedIn(!!token);
+    }, [location]);
+
+    // const handleLogout = async () => {
+    //     const confirmLogout = window.confirm('로그아웃 하시겠습니까?');
+    //     if (confirmLogout) {
+    //         try {
+    //             const response = await axios.post('http://ajouchong.com:8080/api/auth/logout');
+    //             if (response.data.code === 1) {
+    //                 // Successful logout: update state, clear token, redirect to sign-in
+    //                 setIsLoggedIn(false);
+    //                 localStorage.removeItem('token');
+    //                 navigate('/');
+    //             } else {
+    //                 console.error('Logout error:', response.data.message);
+    //             }
+    //         } catch (error) {
+    //             console.error('Logout request failed:', error);
+    //         }
+    //     }
+    // };
+
+
+    const getNavtitle = () => {
+        switch (location.pathname) {
+            case '/about':
+                return '총학생회 소개';
+            case '/promise':
+                return '공약 소개';
+            case '/organization':
+                return '조직도';
+            case '/map':
+                return '오시는 길';
+            case '/greeting':
+                return '인사말';
+
+            default:
+                return '';
+        }
+    };
+    const currentPath = location.pathname;
+
+    // const isMainPage = currentPath === '/';
+    // const isIntroductionActive = ['/about', '/promise', '/organization', '/map'].includes(currentPath);
+    // const isNewsActive = ['/announcement', '/planning'].includes(currentPath);
+    // const isResourcesActive = ['/bylaws', '/proceeding', '/audit'].includes(currentPath);
+    // const isCommunicationActive = ['/qna', '/require'].includes(currentPath);
+    // const isWelfareActive = ['/promotion', '/rental'].includes(currentPath);
+
+    const navtitle = getNavtitle();
+    const isMainPage = location.pathname === '/';
+    const isIntroductionActive = ['/introduction/about', '/introduction/promise', '/introduction/organization', '/introduction/map','/introduction/campusmap'].includes(location.pathname);
+    const isNewsActive = ['/news/announcement',  '/news/planning'].includes(location.pathname);
+    const isResourcesActive = ['/resources/bylaws',  '/resources/proceeding','/resources/audit'].includes(location.pathname);
+    const isCommunicationActive = ['/communication/qna', '/communication/require'].includes(location.pathname);
+    const isWelfareActive = ['/welfare/promotion', '/welfare/rental'].includes(location.pathname);
+
     return (
         <div>
         <header className="header">
             <div className="upper">
                 <nav className="upnav-menu">
                     <ul>
-                        <li><a href="#https://www.ajou.ac.kr/">아주대학교</a></li>
+                        <li><a href="https://www.ajou.ac.kr/">아주대학교</a></li>
                         <span className="dot"> • </span>
                         <li><a href="https://mportal.ajou.ac.kr/">아주대 포탈</a></li>
                         <span className="dot"> • </span>
@@ -34,9 +140,14 @@ const Header = () => {
                 </nav>
                 <nav className="upnav-menu2">
                     <ul>
-                        <li><a href="#map">사이트맵</a></li>
+                        <li><a href="/sitemap">사이트맵</a></li>
                         <span className="dot"> • </span>
-                        <li><a href="#login">로그인</a></li>
+                        {isLoggedIn ? (
+                            <li onClick={handleLogout} style={{ cursor: 'pointer' }}>로그아웃</li>
+                        ) : (
+                            // 로그인 버튼 클릭 시 Google OAuth로 이동
+                            <li onClick={handleGoogleLogin} style={{ cursor: 'pointer' }}>로그인</li>
+                        )}
                     </ul>
                 </nav>
 
@@ -54,14 +165,16 @@ const Header = () => {
                             onMouseEnter={() => handleMouseEnter('introduction')}
                             onMouseLeave={handleMouseLeave}
                         >
-                            <a className="navtitle" href="#introduction">소개</a>
+                            <div className={`navtitle ${isIntroductionActive ? 'active' : ''}`}
+                                 href="/introduction">소개
+                            </div>
                             {dropdown === 'introduction' && (
                                 <ul className="dropdown-container">
-                                    <li><a href="#sub1">총학생회 소개</a></li>
-                                    <li><a href="#sub2">공약 소개</a></li>
-                                    <li><a href="#sub3">조직도</a></li>
-                                    <li><a href="#sub4">인사말</a></li>
-                                    <li><a href="#sub5">오시는 길</a></li>
+                                    <li><a href="/introduction/about">총학생회 소개</a></li>
+                                    <li><a href="/introduction/promise">공약 소개</a></li>
+                                    <li><a href="/introduction/organization">조직도</a></li>
+                                    <li><a href="/introduction/map">오시는 길</a></li>
+                                    <li><a href="/introduction/campusmap">캠퍼스 맵</a></li>
                                 </ul>
                             )}
                         </li>
@@ -69,11 +182,11 @@ const Header = () => {
                             onMouseEnter={() => handleMouseEnter('news')}
                             onMouseLeave={handleMouseLeave}
                         >
-                            <a className="navtitle" href="#news">소식</a>
+                            <div className={`navtitle ${isNewsActive ? 'active' : ''}`} href="/news">소식</div>
                             {dropdown === 'news' && (
                                 <ul className="dropdown-container">
-                                    <li><a href="#sub1">공지사항</a></li>
-                                    <li><a href="#sub2">학사일정</a></li>
+                                    <li><a href="/news/notice">공지사항</a></li>
+                                    {/*<li><a href="/news/planning">학사일정</a></li>*/}
                                 </ul>
                             )}
                         </li>
@@ -81,11 +194,14 @@ const Header = () => {
                             onMouseEnter={() => handleMouseEnter('communication')}
                             onMouseLeave={handleMouseLeave}
                         >
-                            <a className="navtitle" href="#communication">소통</a>
+                            <div className={`navtitle ${isCommunicationActive ? 'active' : ''}`}
+                                 href="/communication">소통
+                            </div>
                             {dropdown === 'communication' && (
                                 <ul className="dropdown-container">
-                                    <li><a href="#sub1">Q&A</a></li>
-                                    <li><a href="#sub2">100인 안건 상정제</a></li>
+                                    <li><a href="/communication/qna">Q&A</a></li>
+                                    <li><a href="/communication/require">100인 안건 상정제</a></li>
+                                    <li><a href="/communication/commu">통합 소통 창구</a></li>
                                 </ul>
                             )}
                         </li>
@@ -93,35 +209,42 @@ const Header = () => {
                             onMouseEnter={() => handleMouseEnter('resources')}
                             onMouseLeave={handleMouseLeave}
                         >
-                            <a className="navtitle" href="#resources">자료실</a>
+                            <div className={`navtitle ${isResourcesActive ? 'active' : ''}`} href="/resources">자료실</div>
                             {dropdown === 'resources' && (
                                 <ul className="dropdown-container">
-                                    <li><a href="#sub1">세칙 및 회칙</a></li>
-                                    <li><a href="#sub2">회의록</a></li>
-                                    <li><a href="#sub2">감사자료</a></li>
+                                    <li><a href="/resources/bylaws">세칙 및 회칙</a></li>
+                                    <li><a href="/resources/proceeding">회의록</a></li>
+                                    <li><a href="/resources/audit">감사자료</a></li>
                                 </ul>
                             )}
                         </li>
                         <li
-                            onMouseEnter={() => handleMouseEnter('student-welfare')}
+                            onMouseEnter={() => handleMouseEnter('welfare')}
                             onMouseLeave={handleMouseLeave}
                         >
-                            <a className="navtitle" href="#student-welfare">학생복지</a>
-                            {dropdown === 'student-welfare' && (
+                            <div className={`navtitle ${isWelfareActive ? 'active' : ''}`}
+                                 href="/student-welfare">학생복지
+                            </div>
+                            {dropdown === 'welfare' && (
                                 <ul className="dropdown-container">
-                                    <li><a href="#sub1">제휴백과</a></li>
-                                    <li><a href="#sub2">대여사업</a></li>
+                                    <li><a href="/welfare/promotion">제휴백과</a></li>
+                                    <li><a href="/welfare/rental">대여사업</a></li>
                                 </ul>
                             )}
                         </li>
                     </ul>
                 </nav>
-                <div className="button">
-                    <a href="#log-in">Sign In</a>
+                <div className="button" >
+                    {isLoggedIn ? (
+                        <button onClick={handleLogout} className="custom-button" style={{cursor: 'pointer'}}>Sign Out</button>
+                    ) : (
+                        <button onClick={handleGoogleLogin} className="custom-button" style={{ cursor: 'pointer'}}>Sign In</button>
+                    )}
                 </div>
             </div>
         </header>
-
+            {/*{!isMainPage && <Breadcrumb />}*/}
+            {/*{location.pathname !== '/' && <Breadcrumb navtitle={navtitle} />}*/}
         </div>
     );
 }
