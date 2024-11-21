@@ -1,10 +1,25 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ isLoggedIn, children }) => {
+    const handleGoogleLogin = () => {
+        const clientId = '440712020433-ljqa7d2r8drohnblmmfum3cls1et2kuq.apps.googleusercontent.com';
+        const redirectUri = 'http://www.ajouchong.com/login/oauth2/code/google'; // Google Cloud Console에 설정된 URI와 일치해야 함
+
+        const googleAuthUrl =
+            `https://accounts.google.com/o/oauth2/v2/auth?` +
+            `client_id=${clientId}&` +
+            `redirect_uri=${redirectUri}&` +
+            `response_type=code&` +
+            `scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&` +
+            `hd=ajou.ac.kr`;
+
+        window.location.href = googleAuthUrl;
+    };
+
     if (!isLoggedIn) {
-        // Redirect to the login page if not logged in
-        return <Navigate to="/signin" replace />;
+        // Redirect to Google OAuth login
+        handleGoogleLogin();
+        return null; // Do not render anything while redirecting
     }
 
     // Render the child components if logged in

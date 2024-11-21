@@ -14,7 +14,7 @@ const GoogleOAuthCallback = () => {
             const fetchAccessToken = async () => {
                 try {
                     // 백엔드로 authorization code를 전송해 access token을 요청
-                    const response = await axios.post('http://www.ajouchong.com/oauth2/authorization/google', {
+                    const response = await axios.post('http://www.ajouchong.com/dev/login/oauth/google', {
                         code: authorizationCode,
                     });
 
