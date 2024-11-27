@@ -1,6 +1,7 @@
 import React, {  useState, useEffect }  from 'react';
 import './Header.css';
 import { useNavigate,useLocation } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext'; // AuthContext 가져오기
 
 import Breadcrumb from './Breadcrumb';
 import axios from 'axios';
@@ -10,28 +11,42 @@ const Header = () => {
     const location = useLocation();
     // const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigate = useNavigate();
+    const { auth, logout } = useAuth(); // 로그인 상태와 로그아웃 함수 가져오기
+
+
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    const handleGoogleLogin = () => {
+     const handleGoogleLogin = () => {
         const clientId = '440712020433-ljqa7d2r8drohnblmmfum3cls1et2kuq.apps.googleusercontent.com';
-        const redirectUri = 'http://www.ajouchong.com/login/oauth2/code/google'; // Google Cloud Console에 설정된 URI와 일치해야 함
+        const redirectUri = 'https://www.ajouchong.com/api/login/oauth/google';
 
+        // Google OAuth URL 생성
         const googleAuthUrl =
             `https://accounts.google.com/o/oauth2/v2/auth?` +
             `client_id=${clientId}&` +
-            `redirect_uri=${redirectUri}&` +
+            `redirect_uri=${encodeURIComponent(redirectUri)}&` +
             `response_type=code&` +
-            `scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&` +
+            `scope=${encodeURIComponent(
+                'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'
+            )}&` +
             `hd=ajou.ac.kr`;
 
+        if (process.env.NODE_ENV === 'development') {
+            console.log("Google OAuth URL:", googleAuthUrl);
+        }
+
+        // Google OAuth URL로 리디렉션
         window.location.href = googleAuthUrl;
     };
 
+
     const handleLogout = () => {
-        setIsLoggedIn(false);
-        alert('Logged out successfully');
+        logout(); // AuthContext에서 제공하는 로그아웃 함수 호출
+        alert('로그아웃 되었습니다.');
     };
+
+
 
 
     const handleMouseEnter = (menu) => {
@@ -142,12 +157,16 @@ const Header = () => {
                     <ul>
                         <li><a href="/sitemap">사이트맵</a></li>
                         <span className="dot"> • </span>
-                        {isLoggedIn ? (
-                            <li onClick={handleLogout} style={{ cursor: 'pointer' }}>로그아웃</li>
+                        {auth.isAuthenticated ? ( // 로그인 상태에 따라 조건부 렌더링
+                            <li onClick={handleLogout} style={{ cursor: 'pointer' }}>
+                                로그아웃
+                            </li>
                         ) : (
-                            // 로그인 버튼 클릭 시 Google OAuth로 이동
-                            <li onClick={handleGoogleLogin} style={{ cursor: 'pointer' }}>로그인</li>
+                            <li onClick={handleGoogleLogin} style={{ cursor: 'pointer' }}>
+                                로그인
+                            </li>
                         )}
+
                     </ul>
                 </nav>
 
@@ -234,11 +253,11 @@ const Header = () => {
                         </li>
                     </ul>
                 </nav>
-                <div className="button" >
-                    {isLoggedIn ? (
-                        <button onClick={handleLogout} className="custom-button" style={{cursor: 'pointer'}}>Sign Out</button>
+                <div className="button">
+                    {auth.isAuthenticated ? (
+                        <button onClick={handleLogout} className="auth-button">Logout</button>
                     ) : (
-                        <button onClick={handleGoogleLogin} className="custom-button" style={{ cursor: 'pointer'}}>Sign In</button>
+                        <button onClick={handleGoogleLogin} className="auth-button">Login</button>
                     )}
                 </div>
             </div>
